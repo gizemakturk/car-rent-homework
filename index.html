@@ -20,18 +20,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <!-- Navigation Bar -->
 <div class="w3-bar w3-white w3-large">
-  <a href="index.html" class="w3-bar-item w3-button w3-red w3-mobile"><i class="fa fa-car w3-margin-right"></i>RedCar</a>
-  <a href="about.html" class="w3-bar-item w3-button w3-mobile">Cars</a>
+  <a href="index.html" class="w3-bar-item w3-button w3-teal w3-mobile"><i class="fa fa-car w3-margin-right"></i>RedCar</a>
+  <a href="cars.html" class="w3-bar-item w3-button w3-mobile">Cars</a>
   <a href="about.html" class="w3-bar-item w3-button w3-mobile">About</a>
   <a href="services.html" class="w3-bar-item w3-button w3-mobile">Services</a>
   <a href="contact.html" class="w3-bar-item w3-button w3-mobile">Contact</a>
-
-  <a href="signin.html" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>
-  
+  <a button onclick="document.getElementById('contact').style.display='block'"class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>
 </div>
-<div class="w3-container w3-margin-top" id="rooms">
+<div class="w3-container w3-margin-top">
 </div>
-
 <div class="w3-row-padding">
   <div class="w3-col m2">
     <label><i class="fa fa-map-marker"></i> Pick Up Location</label>
@@ -141,10 +138,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         <h2 class="w3-wide"><i class="fa fa-usd"></i> 10</h2>
         <span class="w3-opacity">per month</span>
       </li>
-      <li class="w3-theme-l5 w3-padding-24">
-        <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
-      </li>
-    </ul>
+     </ul>
   </div>
 
   <div class="w3-third w3-margin-bottom">
@@ -160,10 +154,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         <h2 class="w3-wide"><i class="fa fa-usd"></i> 25</h2>
         <span class="w3-opacity">per month</span>
       </li>
-      <li class="w3-theme-l5 w3-padding-24">
-        <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
-      </li>
-    </ul>
+     </ul>
   </div>
 
   <div class="w3-third w3-margin-bottom">
@@ -178,9 +169,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <li class="w3-padding-16">
         <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
         <span class="w3-opacity">per month</span>
-      </li>
-      <li class="w3-theme-l5 w3-padding-24">
-        <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
       </li>
     </ul>
   </div>  
@@ -284,31 +272,35 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </div>
   <!--Client says-->
    <!-- First Photo Grid-->
+   <div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
    <div class="w3-row-padding w3-padding-16 w3-center" id="food">
 
     <h1 class="display-4 text-uppercase text-center mb-5">Client Says</h1>
     <div class="w3-quarter">
-      <img src="img/team-1.jpg" alt="Sandwich" style="width:100%">
+      <img src="img/team-1.jpg" style="width:100%">
       <h3>The Perfect Sandwich, A Real NYC Classic</h3>
       <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
     </div>
     <div class="w3-quarter">
-      <img src="img/team-2.jpg" alt="Steak" style="width:100%">
+      <img src="img/team-2.jpg" style="width:100%">
       <h3>Let Me Tell You About This Steak</h3>
       <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
     </div>
     <div class="w3-quarter">
-      <img src="img/team-3.jpg" alt="Cherries" style="width:100%">
+      <img src="img/team-3.jpg" style="width:100%">
       <h3>Cherries, interrupted</h3>
       <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
       <p>What else?</p>
     </div>
-    <div class="w3-quarter">
-      <img src="img/team-4.jpg" alt="Pasta and Wine" style="width:100%">
+    <div class="w3-quarter w3-round-xxlarge">
+      <img src="img/team-4.jpg" style="width:100%">
       <h3>Once Again, Robust Wine and Vegetable Pasta</h3>
       <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
     </div>
   </div>
+    </div>
+   </div> 
    <!-- Pagination -->
    <div class="w3-center w3-padding-32">
     <div class="w3-bar">
@@ -320,8 +312,23 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
     </div>
   </div>
-  
-  
+    <!-- Modal -->
+    <div id="contact" class="w3-modal">
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-black">
+          <span onclick="document.getElementById('contact').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+          <h1>SIGN IN</h1>
+        </div>
+        <div class="w3-container">
+          <p>Reserve a table, ask for today's special or just send us a message:</p>
+          <form action="/action_page.php" target="_blank">
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="User Name" required name="UserName"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="*******" required name="Password"></p>
+             <p><button class="w3-button w3-teal" type="submit">SIGN IN</button></p>
+          </form>
+        </div>
+      </div>
+    </div>
 <!--
   <div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
     <h2>Contact</h2>
@@ -353,6 +360,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   </div>
  
 </footer>
+
 
 <!-- Add Google Maps -->
 <script>
