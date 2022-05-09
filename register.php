@@ -23,11 +23,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <!-- Navigation Bar -->
 <div class="w3-bar w3-white w3-large">
-  <a href="index.html" class="w3-bar-item w3-button w3-teal w3-mobile"><i class="fa fa-car w3-margin-right"></i>RedCar</a>
-  <a href="cars.html" class="w3-bar-item w3-button w3-mobile">Cars</a>
-  <a href="about.html" class="w3-bar-item w3-button w3-mobile">About</a>
-  <a href="services.html" class="w3-bar-item w3-button w3-mobile">Services</a>
-  <a href="contact.html" class="w3-bar-item w3-button w3-mobile">Contact</a>
+  <a href="index.php" class="w3-bar-item w3-button w3-teal w3-mobile"><i class="fa fa-car w3-margin-right"></i>RedCar</a>
+  <a href="cars.php" class="w3-bar-item w3-button w3-mobile">Cars</a>
+  <a href="about.php" class="w3-bar-item w3-button w3-mobile">About</a>
+  <a href="services.php" class="w3-bar-item w3-button w3-mobile">Services</a>
+  <a href="contact.php" class="w3-bar-item w3-button w3-mobile">Contact</a>
   <a button onclick="document.getElementById('contact').style.display='block'"class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>
 </div>
 
