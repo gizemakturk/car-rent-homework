@@ -111,7 +111,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   <div class="w3-row-padding"> 
    <div class="w3-container">
       <div class="container ">
-          <h1 class="display-4 text-uppercase mb-5">Welcome To <span class="text-primary">Royal Cars</span></h1> <br><br>         
+          <h1 class="display-4 text-uppercase mb-5">Welcome To <span class="text-primary">Red Cars</span></h1> <br><br>         
               <div class="col-lg-12">
                   <img class="w-75 mb-4" src="img/about.png" width="100%">
                   <p>Justo et eos et ut takimata sed sadipscing dolore lorem, et elitr labore labore voluptua no rebum sed, stet voluptua amet sed elitr ea dolor dolores no clita. Dolores diam magna clita ea eos amet, amet rebum voluptua vero vero sed clita accusam takimata. Nonumy labore ipsum sea voluptua sea eos sit justo, no ipsum sanctus sanctus no et no ipsum amet, tempor labore est labore no. Eos diam eirmod lorem ut eirmod, ipsum diam sadipscing stet dolores elitr elitr eirmod dolore. Magna elitr accusam takimata labore, et at erat eirmod consetetur tempor eirmod invidunt est, ipsum nonumy at et.</p>
