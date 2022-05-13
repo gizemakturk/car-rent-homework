@@ -32,7 +32,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </div>
 
 <!--Register-->
-<form action="/action_page.php">
+<form  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
   <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create an account.</p>
@@ -44,16 +44,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <input type="text" placeholder="Enter Last Name" name="lastname" id="lastname" required>
 
     <label for="phonenumber"><b>Phone Number</b></label>
-    <input type="text" placeholder="Enter Phone Number" name="phonenumber" id="phonenumber" required>
+    <input type="text" placeholder="Enter Phone Number" name="number" id="phonenumber" required>
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    
+    <label for="gender"><b>Gender</b></label>
+    <input type="text" placeholder="Enter Gender" name="gender" id="gender" required>
+
+    <label for="dob"><b>DateofBirth</b></label>
+    <input type="text" placeholder="Enter Date of Birth" name="dob" id="dob" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+    <input type="password" placeholder="Enter Password" name="password" id="psw" required>
 
     <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+    <input type="password" placeholder="Repeat Password" name="password" id="psw-repeat" required>
     <hr>
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
@@ -90,6 +96,137 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       </div>
     </div>
  
+    <?php
+    // formdan alma
+    require_once "connect.php";
+$fnameErr = $lnameErr = $emailErr = $genderErr = $numberErr= $dobErr=$passwordErr= "";
+$fname = $email = $gender =$number= $dob=$password= "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ 
+  
+  $validation = true;
+  if (empty($_POST["firstname"])) {
+    $fnameErr = "First Name is required";
+    $validation = false;
+  } else {
+    $fname = test_input($_POST["firstname"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$fname)) {
+      $fnameErr = "Only letters and white space allowed";
+      $validation = false;
+    }
+  }
+  
+   if (empty($_POST["lastname"])) {
+      $lnameErr = "Last Name is required";
+      $validation = false;
+    } else {
+      $lname = test_input($_POST["lastname"]);
+  
+      // check if name only contains letters and whitespace
+      if (!preg_match("/^[a-zA-Z-' ]*$/",$lname)) {
+        $lnameErr = "Only letters and white space allowed";
+        $validation = false;
+      }
+    }
+   
+  if (empty($_POST["email"])) {
+    $emailErr = "Email is required";
+    $validation = false;
+  } else {
+    $email = test_input($_POST["email"]);
+
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "Invalid email format";
+      $validation = false;
+    }
+  }
+ 
+  if (empty($_POST["number"])) {
+    $numberErr = "Phone Nubmer is required";
+    $validation = false;
+  } else {
+    $number = test_input($_POST["number"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[0-9]*$/",$number)) {
+      $numberErr = "Only numbers and white space allowed";
+      $validation = false;
+    }
+  }
+  
+  if (empty($_POST["dob"])) {
+    $dobErr = "Date of Birth is required";
+    $validation = false;
+  } else {
+    $dob = test_input($_POST["dob"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[0-9]*$/",$dob)) {
+      $dobErr = "Only numbers and white space allowed";
+      $validation = false;
+    }
+  }
+  
+
+  if (empty($_POST["gender"])) {
+    $genderErr = "Gender is required";
+    $validation = false;
+  } else {
+    $gender = test_input($_POST["gender"]);
+
+  }
+//   if (empty($password)) {
+//     $passwordErr = "Password is required";
+//     $validation = false;
+// }else{
+  $password = $_POST["password"];
+  
+// }
+
+if ($validation) {
+
+
+  $encPasswordd= md5($password);
+  $sql = "SELECT customerid, firstname, lastname,gender,dob,email,password FROM customer WHERE email='$email'";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+      echo "alredy registered";
+  }else{
+      $encPasswordd=md5($password);
+       
+      $sql = "INSERT INTO customer (firstname, lastname,gender,dob,email,password)
+VALUES ('$fname', '$lname', '$gender','$dob','$email','$encPasswordd')";
+
+      if ($conn->query($sql) === TRUE) {
+          echo "New record created successfully";
+          
+      } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+  }
+ 
+
+  $conn->close();
+ 
+} else {
+  echo "password or username incorrect";
+}
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+echo "first" . $fname ;
+?>
+
   <!-- Footer -->
 <footer class="w3-padding-32 w3-black w3-center w3-margin-top">
     <h5>Find Us On</h5>
