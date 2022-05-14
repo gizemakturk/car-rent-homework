@@ -179,13 +179,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender = test_input($_POST["gender"]);
 
   }
-//   if (empty($password)) {
-//     $passwordErr = "Password is required";
-//     $validation = false;
-// }else{
+
   $password = $_POST["password"];
   
-// }
+
 
 if ($validation) {
 
@@ -224,7 +221,6 @@ function test_input($data) {
   return $data;
 }
 
-echo "first" . $fname ;
 ?>
 
   <!-- Footer -->
