@@ -1,3 +1,7 @@
+<?php
+include 'connect.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +14,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="style.css" rel="stylesheet" type="text/css">
 <style>
 body {
   font-family: Arial;
@@ -314,21 +319,110 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </div>
   <!-- Modal -->
   <div id="contact" class="w3-modal">
-    <div class="w3-modal-content w3-animate-zoom">
-      <div class="w3-container w3-black">
-        <span onclick="document.getElementById('contact').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-        <h1>SIGN IN</h1>
-      </div>
-      <div class="w3-container">
-        <p>Reserve a table, ask for today's special or just send us a message:</p>
-        <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="User Name" required name="UserName"></p>
-          <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="*******" required name="Password"></p>
-           <p><button class="w3-button w3-teal" type="submit">SIGN IN</button></p>
-        </form>
-      </div>
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-black">
+          <span onclick="document.getElementById('contact').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+          <h1>SIGN IN</h1>
+        </div>
+        
+        <div class="w3-container">
+          
+          <form  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="email" required name="email"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="*******" required name="password"></p>
+             <p><button class="w3-button w3-teal" type="submit">SIGN IN</button></p>
+             <p><button class="w3-button w3-teal" type="button" onclick="window.location.href='register.php'">REGISTER</button></p>
+              <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
     </div>
-  </div>
+    <div class="" style="background-color:#f1f1f1">
+      <button  onclick="document.getElementById('contact').style.display='none'"type="button" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  
+          </form>
+          
+        </div>
+      </div>
+      <?php
+  $pickuplocation = $droplocation = $pickupdate = $dropdate = $selectcar = "";
+  $pickuplocationErr = $droplocationErr = $pickupdateErr = $dropdateErr = $selectcarErr = "";
+  
+    $validation = true;
+    $pickuplocation =$_SESSION["pickup-location"];
+    $droplocation =$_SESSION["drop-location"];
+    $pickupdate =$_SESSION["pickup-date"];
+    $dropdate =$_SESSION["drop-date"];
+    $selectcar =$_SESSION["select-car"];
+  
+  
+   if ($validation) {
+    $sql = "SELECT * from car where not exists (select r.carid from rent r where $pickupdate between r.startdate and r.enddate )";
+    $result = $conn->query($sql);
+
+    if ($result == false ) {
+        
+    }else if($result->num_rows > 0){
+      while($row = mysqli_fetch_assoc($result)) {
+        echo "id: " . $row["carid"]. " - model: " . $row["modelname"]. "<br>";
+      }
+    }else{
+      echo 'araba yok';
+    }
+
+
+    $conn->close();
+
+  } else {
+    echo "something wrong";
+  }
+
+  ?>
+    <?php 
+    $email =$password= "";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $validation = true;
+      if (empty($_POST["email"])) {
+        $emailErr = "Email is required";
+        $validation = false;
+      } else {
+        $email = test_input($_POST["email"]);
+    
+        // check if e-mail address is well-formed
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          $emailErr = "Invalid email format";
+          $validation = false;
+        }
+      }
+      
+     $password = $_POST["password"];
+     
+     if ($validation) {
+     $encPasswordd= md5($password);
+      $sql = "SELECT customerid, firstname FROM customer WHERE email='$email' and password='$encPasswordd'";
+      $result = $conn->query($sql);
+      if ($result->num_rows > 0) {
+          echo "login success";
+      }else{
+          echo 'password or email incorrect';
+      }
+     
+    
+      $conn->close();
+     
+    } else {
+      echo "something wrong";
+    }
+    }
+    function test_input($data) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
+    ?>
+
   <!-- Footer -->
   <footer class="w3-padding-32 w3-black w3-center w3-margin-top">
     <h5>Find Us On</h5>
