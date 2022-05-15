@@ -133,117 +133,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
     <!--Cars Section-->
     <div class="w3-row-padding w3-center w3-padding-64" id="pricing">
-      <h2>CARS</h2>
-      <p>Choose a service that helps your needs.</p><br>
-      <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-hover-shadow">
-          <li class="w3-theme">
-            <img src="img/car-rent-1.png" style="width:100%">
       
-          </li>
-          <li class="w3-padding-16"><b>10GB</b> Storage</li>
-          <li class="w3-padding-16"><b>10</b> Emails</li>
-          <li class="w3-padding-16"><b>10</b> Domains</li>
-          <li class="w3-padding-16"><b>Endless</b> Support</li>
-          <li class="w3-padding-16">
-            <h2 class="w3-wide"><i class="fa fa-usd"></i> 10</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button  onclick="document.getElementById('id01').style.display='block'"  class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Rent</button>
-          </li>
-        </ul>
-      </div>  
-      <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-hover-shadow">
-          <li class="w3-theme-l2">
-            <img src="img/car-rent-6.png" style="width:100%">
-          </li>
-          <li class="w3-padding-16"><b>25GB</b> Storage</li>
-          <li class="w3-padding-16"><b>25</b> Emails</li>
-          <li class="w3-padding-16"><b>25</b> Domains</li>
-          <li class="w3-padding-16"><b>Endless</b> Support</li>
-          <li class="w3-padding-16">
-            <h2 class="w3-wide"><i class="fa fa-usd"></i> 25</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button  onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Rent</button>
-          </li>
-        </ul>
-      </div>  
-      <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-hover-shadow">
-          <li class="w3-theme">
-            <img src="img/car-rent-5.png" style="width:100%">
-          </li>
-          <li class="w3-padding-16"><b>50GB</b> Storage</li>
-          <li class="w3-padding-16"><b>50</b> Emails</li>
-          <li class="w3-padding-16"><b>50</b> Domains</li>
-          <li class="w3-padding-16"><b>Endless</b> Support</li>
-          <li class="w3-padding-16">
-            <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button  onclick="document.getElementById('id01').style.display='block'"  class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Rent</button>
-          </li>
-        </ul>
-      </div>
-      <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-hover-shadow">
-          <li class="w3-theme">
-            <img src="img/car-rent-4.png" style="width:100%">
-          </li>
-          <li class="w3-padding-16"><b>50GB</b> Storage</li>
-          <li class="w3-padding-16"><b>50</b> Emails</li>
-          <li class="w3-padding-16"><b>50</b> Domains</li>
-          <li class="w3-padding-16"><b>Endless</b> Support</li>
-          <li class="w3-padding-16">
-            <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button  onclick="document.getElementById('id01').style.display='block'"  class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Rent</button>
-          </li>
-        </ul>
-      </div>
-      <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-hover-shadow">
-          <li class="w3-theme">
-            <img src="img/car-rent-3.png" style="width:100%">
-          </li>
-          <li class="w3-padding-16"><b>50GB</b> Storage</li>
-          <li class="w3-padding-16"><b>50</b> Emails</li>
-          <li class="w3-padding-16"><b>50</b> Domains</li>
-          <li class="w3-padding-16"><b>Endless</b> Support</li>
-          <li class="w3-padding-16">
-            <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button  onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Rent</button>
-          </li>
-        </ul>
-      </div>
-      <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-hover-shadow">
-          <li class="w3-theme">
-            <img src="img/car-rent-2.png" style="width:100%">
-          </li>
-          <li class="w3-padding-16"><b>50GB</b> Storage</li>
-          <li class="w3-padding-16"><b>50</b> Emails</li>
-          <li class="w3-padding-16"><b>50</b> Domains</li>
-          <li class="w3-padding-16"><b>Endless</b> Support</li>
-          <li class="w3-padding-16">
-            <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Rent</button>
-          </li>
-        </ul>
-      </div>
+      
     </div>
   <!-- Modal -->
 <div id="id01" class="w3-modal">
@@ -251,10 +142,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <div class="row">
   <div class="col-75">
     <div class="container">
-      <form action="cars.html">
+    <form name="formcars" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
       
         <div class="row">
           <div class="col-50">
+          <div><span onclick="document.getElementById('id01').style.display='none'" style="margin-top: 100px;margin-right:180px;" class="w3-button w3-display-topright w3-large">x</span></div>
             <h3>Billing Address</h3>
             <label for="fname"><i class="fa fa-user"></i> Full Name</label>
             <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
@@ -308,15 +200,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         <label>
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label>
-        <input type="submit" value="Continue to checkout" class="btn">
+        <input type="submit" name="formcars" value="Continue to checkout" class="btn">
       </form>
     </div>
   </div>
-  <div class="col-25">
-  
-  </div>
+ </div>
 </div>
-</div>
+
+
   <!-- Modal -->
   <div id="contact" class="w3-modal">
       <div class="w3-modal-content w3-animate-zoom">
@@ -327,10 +218,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         
         <div class="w3-container">
           
-          <form  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+          <form name="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="email" required name="email"></p>
             <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="*******" required name="password"></p>
-             <p><button class="w3-button w3-teal" type="submit">SIGN IN</button></p>
+             <p><button class="w3-button w3-teal" type="submit" name="login">SIGN IN</button></p>
              <p><button class="w3-button w3-teal" type="button" onclick="window.location.href='register.php'">REGISTER</button></p>
               <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -360,28 +251,215 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
    if ($validation) {
     $sql = "SELECT * from car where not exists (select r.carid from rent r where $pickupdate between r.startdate and r.enddate )";
     $result = $conn->query($sql);
+    $carstring = "<h2>CARS</h2>\
+    <p>Choose a service that helps your needs.</p><br>";
 
     if ($result == false ) {
         
     }else if($result->num_rows > 0){
       while($row = mysqli_fetch_assoc($result)) {
         echo "id: " . $row["carid"]. " - model: " . $row["modelname"]. "<br>";
+        $sqlcardetails="SELECT * FROM cardetails where detailsid=" . $row["detailsid"];
+        $detailresult = $conn->query($sqlcardetails);
+        $detailrow = mysqli_fetch_assoc($detailresult);
+        $carstring = $carstring . "<div class='w3-third w3-margin-bottom'>\
+        <ul class='w3-ul w3-border w3-hover-shadow'>\
+          <li class='w3-theme'>\
+            <img src='img/car-rent-1.png' style='width:100%'>\
+          </li>\
+          <li class='w3-padding-16'><b>". $row["brandname"] . " - " .$row["modelname"] ."</b> </li>\
+          <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
+          <li class='w3-padding-16'><b>" . $detailrow["numberofdoors"] . "</b> Number of Doors</li>\
+          <li class='w3-padding-16'><b>" . $detailrow["capatiyofluggage"] . "</b> Capacity of Luggage</li>\
+          <li class='w3-padding-16'><b>" . $detailrow["geartype"] . "</b> Gear Type </li>\
+          <li class='w3-padding-16'>\
+            <h2 class='w3-wide'><i class='fa fa-usd'></i> 10</h2>\
+            <span class='w3-opacity'>per day</span>\
+          </li>\
+          <li class='w3-theme-l5 w3-padding-24'>\
+            <button type='button' onclick='rent();' class='w3-button w3-teal w3-padding-large'><i class='fa fa-check'></i> Rent</button>\
+          </li>\
+        </ul>\
+      </div> ";
       }
     }else{
       echo 'araba yok';
     }
 
-
-    $conn->close();
+    echo "<script>
+    document.getElementById('pricing').innerHTML =\"$carstring\";
+  </script>";
+    
 
   } else {
     echo "something wrong";
   }
 
   ?>
+   <?php
+  require_once "connect.php";
+$fnameErr = $addressErr = $emailErr = $cityErr = $stateErr= $zipErr=$cardnameErr= $cardnumberErr = $expmonthErr = $expyearErr= $cvvErr="";
+$fname = $email = $address =$city= $state=$zip= $cardname = $cardnumber = $expmonth =$expyear= $cvv="";
+if (isset($_POST['formcars'])) {  
+  $validation = true;
+  if (empty($_POST["firstname"])) {
+    $fnameErr = "First Name is required";
+    $validation = false;
+  } else {
+    $fname = test_input($_POST["firstname"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$fname)) {
+      $fnameErr = "Only letters and white space allowed";
+      $validation = false;
+    }
+  }
+  
+  
+ if (empty($_POST["email"])) {
+    $emailErr = "Email is required";
+    $validation = false;
+  } else {
+    $email = test_input($_POST["email"]);
+
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "Invalid email format";
+      $validation = false;
+    }
+  }
+  if (empty($_POST["address"])) {
+    $addressErr = "address is required";
+    $validation = false;
+  } else {
+    $address = test_input($_POST["address"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$address)) {
+      $addressErr = "Only letters and white space allowed";
+      $validation = false;
+    }
+  }
+  if (empty($_POST["city"])) {
+    $cityErr = "city is required";
+    $validation = false;
+  } else {
+    $city = test_input($_POST["city"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$city)) {
+      $cityErr = "Only letters and white space allowed";
+      $validation = false;
+    }
+  }
+  if (empty($_POST["state"])) {
+    $stateErr = "state is required";
+    $validation = false;
+  } else {
+    $state = test_input($_POST["state"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$state)) {
+      $stateErr = "Only letters and white space allowed";
+      $validation = false;
+    }
+  }
+
+  if (empty($_POST["zip"])) {
+    $zipErr = "zip is required";
+    $validation = false;
+  } else {
+    $zip = test_input($_POST["zip"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[0-9]*$/",$zip)) {
+      $zipErr = "Only numbers and white space allowed";
+      $validation = false;
+    }
+  }
+  if (empty($_POST["cardname"])) {
+    $cardnameErr = "cardname is required";
+    $validation = false;
+  } else {
+    $cardname = test_input($_POST["cardname"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$cardname)) {
+      $cardnameErr = "Only letters and white space allowed";
+      $validation = false;
+    }
+  }
+  if (empty($_POST["cardnumber"])) {
+    $cardnumberErr = "cardnumber is required";
+    $validation = false;
+  } else {
+    $cardnumber = test_input($_POST["cardnumber"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$cardnumber)) {
+      $cardnumberErr = "Only letters and white space allowed";
+      $validation = false;
+    }
+  }
+  if (empty($_POST["expmonth"])) {
+    $expmonthErr = "expmonth is required";
+    $validation = false;
+  } else {
+    $expmonth = test_input($_POST["expmonth"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$expmonth)) {
+      $expmonthErr = "Only letters and white space allowed";
+      $validation = false;
+    }
+  }
+  if (empty($_POST["expyear"])) {
+    $expyearErr = "expyear is required";
+    $validation = false;
+  } else {
+    $expyear = test_input($_POST["expyear"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[0-9]*$/",$expyear)) {
+      $expyearErr = "Only numbers and white space allowed";
+      $validation = false;
+    }
+  }
+  if (empty($_POST["cvv"])) {
+    $cvvErr = "CVV is required";
+    $validation = false;
+  } else {
+    $cvv = test_input($_POST["cvv"]);
+
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[0-9]*$/",$cvv)) {
+      $cvvErr = "Only numbers and white space allowed";
+      $validation = false;
+    }
+  }
+  $pickuplocation =$_SESSION["pickup-location"];
+    $droplocation =$_SESSION["drop-location"];
+    $pickupdate =$_SESSION["pickup-date"];
+    $dropdate =$_SESSION["drop-date"];
+    $selectcar =$_SESSION["select-car"];
+    echo $pickupdate;
+  $diff=date_diff(date_create($pickupdate),date_create($dropdate));
+  $amount = $diff->format("%a") * 32;
+  $paymentdate = date("Y-m-d");
+  $sqlinvoince="INSERT INTO invoince (paymentid,amount,paymentdate,firstname,email,address,city,state,zip)
+  VALUES (1,'$amount','$paymentdate','$fname','$email','$address','$city','$state','$zip')";
+   if ($conn->query($sqlinvoince) === TRUE) {
+    echo "New record created successfully";
+    
+} else {
+    echo "Error: " . $sqlinvoince . "<br>" . $conn->error;
+}
+  }$conn->close();
+
+  ?>
     <?php 
     $email =$password= "";
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['login'])) {
       $validation = true;
       if (empty($_POST["email"])) {
         $emailErr = "Email is required";
@@ -409,7 +487,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       }
      
     
-      $conn->close();
+      
      
     } else {
       echo "something wrong";
@@ -436,6 +514,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     </div>
    
   </footer>
-  
+  <script>
+      function rent(params) {
+        document.getElementById('id01').style.display='block';
+      }
+  </script>
   </body>
   </html>

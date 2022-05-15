@@ -87,14 +87,13 @@ session_start();
   </form>
   <?php
 
-  if (isset($_POST['form1'])) {
-    
-    $_SESSION["pickup-location"] = test_input(isset($_POST["pickup-location"]));
-    $_SESSION["drop-location"] = test_input(isset($_POST["drop-location"]));
-    $_SESSION["pickup-date"] = test_input(isset($_POST["pickup-date"]));
-    $_SESSION["drop-date"] = test_input(isset($_POST["drop-date"]));
-    $_SESSION["select-car"] = test_input(isset($_POST["select-car"]));
-  echo "<script> window.location.href='cars.php'</script>";
+  if (isset($_POST['form1'])) {    
+    $_SESSION["pickup-location"] = test_input($_POST["pickup-location"]);
+    $_SESSION["drop-location"] = test_input($_POST["drop-location"]);
+    $_SESSION["pickup-date"] = test_input($_POST["pickup-date"]);
+    $_SESSION["drop-date"] = test_input($_POST["drop-date"]);
+    $_SESSION["select-car"] = test_input($_POST["select-car"]);
+  //echo "<script> window.location.href='cars.php'</script>";
   }
 
   ?>
