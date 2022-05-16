@@ -1,3 +1,7 @@
+<?php
+include '../connect.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +27,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s8 w3-bar">
-      <span>Welcome, <strong>Mike</strong></span><br>
+      <span>Welcome, <strong>Gizem</strong></span><br>
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
@@ -35,10 +39,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="index.html" class="w3-bar-item w3-button w3-padding w3-teal"><i class="fa fa-home fa-fw"></i>Home</a>
-    <a href="vehicle.html" class="w3-bar-item w3-button w3-padding "><i class="fa fa-car fa-fw"></i> Vehicles</a>
-    <a href="reservation.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Reservations</a>
-    <a href="index.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Log Out</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding w3-teal"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="vehicle.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-car fa-fw"></i> Vehicles</a>
+    <a href="reservation.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Reservations</a>
+    <a href="adminlogin.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Log Out</a>
   </div>
 </nav>
 
@@ -48,7 +52,27 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+<?php
+$sqlcar="SELECT COUNT(*) AS carnum from car";
+$result=$conn->query($sqlcar) ;
+  $row =mysqli_fetch_assoc($result);
+  $carnumber=$row["carnum"];
 
+  $sqlviews="SELECT number from views ";
+$result=$conn->query($sqlviews) ;
+  $row =mysqli_fetch_assoc($result);
+  $viewnumber=$row["number"];
+
+  $sqlbook="SELECT COUNT(*) AS book from rent";
+$result=$conn->query($sqlbook) ;
+  $row =mysqli_fetch_assoc($result);
+  $booknumber=$row["book"];
+
+  $sqlcustomer="SELECT COUNT(*) AS customernum from customer";
+$result=$conn->query($sqlcustomer) ;
+  $row =mysqli_fetch_assoc($result);
+  $customernumber=$row["customernum"];
+?>
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
     <h2><b><i class="fa fa-home"></i> HOME</b></h2>
@@ -59,17 +83,17 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-red w3-padding-16">
         <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>52</h3>
+          <h3><?php echo $carnumber ?></h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Messages</h4>
+        <h4>Car Numbers</h4>
       </div>
     </div>
     <div class="w3-quarter">
       <div class="w3-container w3-blue w3-padding-16">
         <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>99</h3>
+          <h3><?php echo $viewnumber ?></h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Views</h4>
@@ -79,7 +103,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-teal w3-padding-16">
         <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>23</h3>
+          <h3><?php echo $booknumber ?></h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Number Of Bookings</h4>
@@ -89,7 +113,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
         <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>50</h3>
+          <h3><?php echo $customernumber ?></h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Users</h4>
@@ -97,27 +121,47 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
   </div>
 
-  <div class="w3-container">
-    <h2>Recent Bookings</h2>
-    <div class="w3-row">
-      <div class="w3-col m2 text-center">
-        <img class="w3-circle" src="../img/car-rent-1.png" style="width:160px;height:96px">
-      </div>
-      <div class="w3-col m10 w3-container">
-        <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-        <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-      </div>
-    </div>
-    <div class="w3-row">
-      <div class="w3-col m2 text-center">
-        <img  src="../img/car-rent-2.png" style="width:160px;height:96px">
-      </div>
-      <div class="w3-col m10 w3-container">
-        <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-      </div>
-    </div>
+  <div class="w3-container" id="recent">
+    
+    
   </div>
+  <?php 
+  $recentbook = "SELECT * FROM rent ORDER BY 'rentid' DESC";
+  $result=$conn->query($recentbook) ;
+  $counter = 1;
+  $html = "<h2>Recent Bookings</h2>";
+  while($row =mysqli_fetch_assoc($result)){
+
+    $customerid=$row["customerid"];
+    $invoinceid=$row["invoinceid"];
+
+    $recentinvoince = "SELECT paymentdate FROM invoince WHERE invoiceid=". $invoinceid;
+    $result1=$conn->query($recentinvoince) ;
+    $row1 =mysqli_fetch_assoc($result1);
+    $paymentdate=$row1["paymentdate"];
+
+    $recentcustomer = "SELECT firstname, lastname FROM customer WHERE customerid=". $customerid;
+    $result2=$conn->query($recentcustomer) ;
+    $row2 =mysqli_fetch_assoc($result2);
+    $customerfullname=$row2["firstname"] . " " . $row2["lastname"];
+
+    $html = $html . "<div class='w3-row'>\
+    <div class='w3-col m2 text-center'>\
+      <img  src='../img/car-rent-". $counter . ".png' style='width:160px;height:96px'>\
+    </div>\
+    <div class='w3-col m10 w3-container'>\
+      <h4>". $customerfullname . " <span class='w3-opacity w3-medium'>". $paymentdate . "M</span></h4>\
+      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>\
+    </div>\
+  </div>";
+
+    $counter = $counter + 1;
+    if($counter > 2) {break;}
+  }
+  echo "<script>
+    document.getElementById('recent').innerHTML =\"$html\";
+  </script>";
+  ?>
   <hr>
   <div class="w3-container">
     <h2>General Stats</h2>

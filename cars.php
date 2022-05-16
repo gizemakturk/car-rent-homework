@@ -258,6 +258,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     if ($result == false ) {
         
     }else if($result->num_rows > 0){
+      $img = 1;
       while($row = mysqli_fetch_assoc($result)) {
         echo "id: " . $row["carid"]. " - model: " . $row["modelname"]. "<br>";
         $sqlcardetails="SELECT * FROM cardetails where detailsid=" . $row["detailsid"];
@@ -266,7 +267,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         $carstring = $carstring . "<div class='w3-third w3-margin-bottom'>\
         <ul class='w3-ul w3-border w3-hover-shadow'>\
           <li class='w3-theme'>\
-            <img src='img/car-rent-1.png' style='width:100%'>\
+            <img src='img/car-rent-". $img . ".png' style='width:100%'>\
           </li>\
           <li class='w3-padding-16'><b>". $row["brandname"] . " - " .$row["modelname"] ."</b> </li>\
           <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
@@ -282,6 +283,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
           </li>\
         </ul>\
       </div> ";
+      $img =  $img + 1;
       }
     }else{
       echo 'araba yok';

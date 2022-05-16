@@ -1,3 +1,6 @@
+<?php
+include '../connect.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,10 +39,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="index.html" class="w3-bar-item w3-button w3-padding "><i class="fa fa-home fa-fw"></i>Home</a>
-    <a href="vehicle.html" class="w3-bar-item w3-button w3-padding w3-teal"><i class="fa fa-car fa-fw"></i> Vehicles</a>
-    <a href="reservation.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Reservations</a>
-    <a href="index.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Log Out</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="vehicle.php" class="w3-bar-item w3-button w3-padding w3-teal"><i class="fa fa-car fa-fw"></i> Vehicles</a>
+    <a href="reservation.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Reservations</a>
+    <a href="adminlogin.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Log Out</a>
     
   </div>
 </nav>
@@ -54,125 +57,63 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <!-- Header -->
   <header class="w3-container" style="padding-top:60px">
     <h5><b>VEHICLES</b></h5>
-    <a href="car_settings.html" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Add New Car </a>
+    <a href="car_settings.php" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Add New Car </a>
   </header>
 
-  <div class="w3-row-padding w3-center w3-padding-16" >
-    <div class="w3-third w3-margin-bottom">
-      <ul class="w3-ul w3-border w3-hover-shadow">
-        <li class="w3-theme">
-          <img src="../img/car-rent-1.png" style="width:100%">    
-        </li>
-        <li class="w3-padding-16"><b>10GB</b> Storage</li>
-        <li class="w3-padding-16"><b>10</b> Emails</li>
-        <li class="w3-padding-16"><b>10</b> Domains</li>
-        <li class="w3-padding-16"><b>Endless</b> Support</li>
-        <li class="w3-padding-16">
-          <h2 class="w3-wide"><i class="fa fa-usd"></i> 10</h2>
-          <span class="w3-opacity">per month</span>
-        </li>
-        <li class="w3-theme-l5 w3-padding-24">
-          <a href="car_settings.html" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Update</a>
-          <button class="w3-button w3-red w3-padding-large"><i class="fa fa-close"></i> Delete</button>      
-        </li>
-      </ul>
-    </div>  
-    <div class="w3-third w3-margin-bottom">
-      <ul class="w3-ul w3-border w3-hover-shadow">
-        <li class="w3-theme-l2">
-          <img src="../img/car-rent-6.png" style="width:100%">
-        </li>
-        <li class="w3-padding-16"><b>25GB</b> Storage</li>
-        <li class="w3-padding-16"><b>25</b> Emails</li>
-        <li class="w3-padding-16"><b>25</b> Domains</li>
-        <li class="w3-padding-16"><b>Endless</b> Support</li>
-        <li class="w3-padding-16">
-          <h2 class="w3-wide"><i class="fa fa-usd"></i> 25</h2>
-          <span class="w3-opacity">per month</span>
-        </li>
-        <li class="w3-theme-l5 w3-padding-24">
-            <a href="car_settings.html" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Update</a>
-            <button class="w3-button w3-red w3-padding-large"><i class="fa fa-close"></i> Delete</button>
-          </li>
-      </ul>
-    </div>  
-    <div class="w3-third w3-margin-bottom">
-      <ul class="w3-ul w3-border w3-hover-shadow">
-        <li class="w3-theme">
-          <img src="../img/car-rent-5.png" style="width:100%">
-        </li>
-        <li class="w3-padding-16"><b>50GB</b> Storage</li>
-        <li class="w3-padding-16"><b>50</b> Emails</li>
-        <li class="w3-padding-16"><b>50</b> Domains</li>
-        <li class="w3-padding-16"><b>Endless</b> Support</li>
-        <li class="w3-padding-16">
-          <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
-          <span class="w3-opacity">per month</span>
-        </li>
-        <li class="w3-theme-l5 w3-padding-24">
-          <a href="car_settings.html" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Update</a>
-            <button class="w3-button w3-red w3-padding-large"><i class="fa fa-close"></i> Delete</button>
-         </li>
-      </ul>
-    </div>
-    <div class="w3-third w3-margin-bottom">
-      <ul class="w3-ul w3-border w3-hover-shadow">
-        <li class="w3-theme">
-          <img src="../img/car-rent-4.png" style="width:100%">
-        </li>
-        <li class="w3-padding-16"><b>50GB</b> Storage</li>
-        <li class="w3-padding-16"><b>50</b> Emails</li>
-        <li class="w3-padding-16"><b>50</b> Domains</li>
-        <li class="w3-padding-16"><b>Endless</b> Support</li>
-        <li class="w3-padding-16">
-          <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
-          <span class="w3-opacity">per month</span>
-        </li>
-        <li class="w3-theme-l5 w3-padding-24">
-          <a href="car_settings.html" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Update</a>
-          <button class="w3-button w3-red w3-padding-large"><i class="fa fa-close"></i> Delete</button>
-         </li>
-      </ul>
-    </div>
-    <div class="w3-third w3-margin-bottom">
-      <ul class="w3-ul w3-border w3-hover-shadow">
-        <li class="w3-theme">
-          <img src="../img/car-rent-3.png" style="width:100%">
-        </li>
-        <li class="w3-padding-16"><b>50GB</b> Storage</li>
-        <li class="w3-padding-16"><b>50</b> Emails</li>
-        <li class="w3-padding-16"><b>50</b> Domains</li>
-        <li class="w3-padding-16"><b>Endless</b> Support</li>
-        <li class="w3-padding-16">
-          <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
-          <span class="w3-opacity">per month</span>
-        </li>
-        <li class="w3-theme-l5 w3-padding-24">
-          <a href="car_settings.html" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Update</a>
-          <button class="w3-button w3-red w3-padding-large"><i class="fa fa-close"></i> Delete</button>
-          </li>
-      </ul>
-    </div>
-    <div class="w3-third w3-margin-bottom">
-      <ul class="w3-ul w3-border w3-hover-shadow">
-        <li class="w3-theme">
-          <img src="../img/car-rent-2.png" style="width:100%">
-        </li>
-        <li class="w3-padding-16"><b>50GB</b> Storage</li>
-        <li class="w3-padding-16"><b>50</b> Emails</li>
-        <li class="w3-padding-16"><b>50</b> Domains</li>
-        <li class="w3-padding-16"><b>Endless</b> Support</li>
-        <li class="w3-padding-16">
-          <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
-          <span class="w3-opacity">per month</span>
-        </li>
-        <li class="w3-theme-l5 w3-padding-24">
-          <a href="car_settings.html" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Update</a>
-          <button class="w3-button w3-red w3-padding-large"><i class="fa fa-close"></i> Delete</button>
-           </li>
-      </ul>
-    </div>
+  <div id="cars" class="w3-row-padding w3-center w3-padding-16" >
+
   </div>
+
+  <?php
+  $sql = "SELECT * from car";
+  $result = $conn->query($sql);
+  $carstring = "";
+  $img = 1;
+  while($row = mysqli_fetch_assoc($result)) {
+   $carid=$row["carid"];
+    $sqlcardetails="SELECT * FROM cardetails where detailsid=" . $row["detailsid"];
+        $detailresult = $conn->query($sqlcardetails);
+        $detailrow = mysqli_fetch_assoc($detailresult);
+        $carstring = $carstring . "<div class='w3-third w3-margin-bottom'>\
+        <ul class='w3-ul w3-border w3-hover-shadow'>\
+          <li class='w3-theme'>\
+          <img src='../img/car-rent-". $img . ".png' style='width:100%'>\
+          </li>\
+          <li class='w3-padding-16'><b>". $row["brandname"] . " - " .$row["modelname"] ."</b> </li>\
+          <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
+          <li class='w3-padding-16'><b>" . $detailrow["numberofdoors"] . "</b> Number of Doors</li>\
+          <li class='w3-padding-16'><b>" . $detailrow["capatiyofluggage"] . "</b> Capacity of Luggage</li>\
+          <li class='w3-padding-16'><b>" . $detailrow["geartype"] . "</b> Gear Type </li>\
+          <li class='w3-padding-16'>\
+            <h2 class='w3-wide'><i class='fa fa-usd'></i> 10</h2>\
+            <span class='w3-opacity'>per day</span>\
+          </li>\
+          <li class='w3-theme-l5 w3-padding-24'>\
+          <form><a href='car_settings.php' class='w3-button w3-teal w3-padding-large'><i class='fa fa-cog'></i> Update</a>\
+          <button name='delete' type='submit' value='". $carid ."' class='w3-button w3-red w3-padding-large'><i class='fa fa-close'></i> Delete</button></form>\
+        </li>\
+        </ul>\
+      </div> ";
+      $img =  $img + 1;
+      if ($img == 7) {
+        $img = 1;
+      }
+  }
+  echo "<script>
+    document.getElementById('cars').innerHTML =\"$carstring\";
+  </script>";
+
+  if(isset($_GET["delete"])){
+    $deletesql="DELETE FROM car WHERE carid=".$_GET["delete"];
+    if ($conn->query($deletesql) === TRUE) {
+      echo "Delete  successfully";
+      
+  } else {
+      echo "Error: " . $deletesql . "<br>" . $conn->error;
+  }
+  }
+  ?>
+
   <!-- Footer -->
   <footer class="w3-padding-32 w3-gray w3-center w3-margin-top">
     <h5>Find Us On</h5>

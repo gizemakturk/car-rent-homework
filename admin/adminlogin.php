@@ -73,7 +73,7 @@ span.psw {
   
 <body>
  
-<form action="/action_page.php" method="post">
+<form action="index.php" method="post">
   <div class="imgcontainer">
       <br><br><br>
     <img src="../img/team1.jpg" style="width: 20%">
@@ -85,7 +85,7 @@ span.psw {
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
         
-    <button type="submit">Login</button>
+    <button type="submit" >Login</button>
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>

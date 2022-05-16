@@ -1,6 +1,10 @@
 <?php
 include 'connect.php';
 session_start();
+$sql="UPDATE views SET number = number + 1 WHERE viewsid=1";
+if ($conn->query($sql) === TRUE) {
+ 
+}
 ?>
 <!DOCTYPE html>
 <html>
