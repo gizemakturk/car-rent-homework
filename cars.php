@@ -136,7 +136,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       
       
     </div>
-  <!-- Modal -->
+  <!-- Modal Payment -->
 <div id="id01" class="w3-modal">
  
 <div class="row">
@@ -200,7 +200,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         <label>
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label>
-        <input type="submit" name="formcars" value="Continue to checkout" class="btn">
+        <button id="paymentForm" type="submit" name="formcars"  class="btn">Continue to checkout
+        </button>
       </form>
     </div>
   </div>
@@ -277,7 +278,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <span class='w3-opacity'>per day</span>\
           </li>\
           <li class='w3-theme-l5 w3-padding-24'>\
-            <button type='button' onclick='rent();' class='w3-button w3-teal w3-padding-large'><i class='fa fa-check'></i> Rent</button>\
+            <button id='" . $row["carid"] . "' type='button' onclick='rent(this.id);' class='w3-button w3-teal w3-padding-large'><i class='fa fa-check'></i> Rent</button>\
           </li>\
         </ul>\
       </div> ";
@@ -396,8 +397,8 @@ if (isset($_POST['formcars'])) {
     $cardnumber = test_input($_POST["cardnumber"]);
 
     // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z-' ]*$/",$cardnumber)) {
-      $cardnumberErr = "Only letters and white space allowed";
+    if (!preg_match("/^[0-9]*$/",$cardnumber)) {
+      $cardnumberErr = "Only numbers and white space allowed";
       $validation = false;
     }
   }
@@ -437,8 +438,10 @@ if (isset($_POST['formcars'])) {
       $validation = false;
     }
   }
-  $pickuplocation =$_SESSION["pickup-location"];
-    $droplocation =$_SESSION["drop-location"];
+  if($validation) {
+    $locations = ["Ankara","Antalya","Izmir","Istanbul"];
+    $pickuplocation =$locations[$_SESSION["pickup-location"]];
+    $droplocation =$locations[$_SESSION["drop-location"]];
     $pickupdate =$_SESSION["pickup-date"];
     $dropdate =$_SESSION["drop-date"];
     $selectcar =$_SESSION["select-car"];
@@ -449,11 +452,28 @@ if (isset($_POST['formcars'])) {
   $sqlinvoince="INSERT INTO invoince (paymentid,amount,paymentdate,firstname,email,address,city,state,zip)
   VALUES (1,'$amount','$paymentdate','$fname','$email','$address','$city','$state','$zip')";
    if ($conn->query($sqlinvoince) === TRUE) {
+    $invoinceid =mysqli_insert_id($conn);
+    $customerid=$_SESSION["customerid"];
+     if(isset($_POST["formcars"])) {
+       $carid= $_POST["formcars"];
+       $sqlrent="INSERT INTO rent (customerid,carid,status,pickupaddress,returnaddress,invoinceid,startdate,enddate)
+       VALUES ($customerid,$carid,'1','$pickuplocation','$droplocation',$invoinceid,'$pickupdate','$dropdate')";
+        if ($conn->query($sqlrent) === TRUE) {
+          echo "New record created successfully";
+          
+      } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+     }
     echo "New record created successfully";
+
     
 } else {
     echo "Error: " . $sqlinvoince . "<br>" . $conn->error;
 }
+  }else {
+    echo "Full name error: " . $fnameErr . "Address error:" . $addressErr ."Email error:". $emailErr ."City error:". $cityErr ."State error:". $stateErr ."Zip error:". $zipErr ."Card name error:". $cardnameErr ."Card number error:". $cardnumberErr ."Exp month error:". $expmonthErr ."Exp year error:". $expyearErr ."Cvv error:". $cvvErr ."";;
+  }
   }$conn->close();
 
   ?>
@@ -517,6 +537,7 @@ if (isset($_POST['formcars'])) {
   <script>
       function rent(params) {
         document.getElementById('id01').style.display='block';
+        document.getElementById('paymentForm').value=params;
       }
   </script>
   </body>

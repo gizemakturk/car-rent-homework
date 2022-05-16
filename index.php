@@ -93,7 +93,7 @@ session_start();
     $_SESSION["pickup-date"] = test_input($_POST["pickup-date"]);
     $_SESSION["drop-date"] = test_input($_POST["drop-date"]);
     $_SESSION["select-car"] = test_input($_POST["select-car"]);
-  //echo "<script> window.location.href='cars.php'</script>";
+  echo "<script> window.location.href='cars.php'</script>";
   }
 
   ?>
@@ -214,7 +214,7 @@ session_start();
   <div class="container-fluid py-5">
     <div class="container pt-5 pb-3">
       <h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>
-      <div class="w3-row-padding w3-padding-16">
+      <div class="w3-row-padding w3-padding-16" id="popularcars">
         <div class="w3-third w3-margin-bottom w3-card-2 w3-hover-opacity">
           <img src="img/car-rent-1.png" alt="Norway" style="width:100%">
           <div class="w3-container w3-white">
@@ -226,7 +226,7 @@ session_start();
             <label style="width: 100px;"><i class="fa fa-car"></i> AUTO</label>
 
             <label><i class="fa fa-car"></i> 25K</label>
-            <button class="w3-button w3-block w3-black w3-margin-bottom">Rent Car</button>
+            <button onclick = "document.getElementById('popularcar').style.display='block'" class="w3-button w3-block w3-black w3-margin-bottom">Rent Car</button>
           </div>
         </div>
         <div class="w3-third w3-margin-bottom w3-card-2 w3-hover-opacity">
@@ -379,7 +379,7 @@ session_start();
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
           <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="email" required name="email"></p>
           <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="*******" required name="password"></p>
-          <p><button class="w3-button w3-teal" type="submit">SIGN IN</button></p>
+          <p><button name="login" class="w3-button w3-teal" type="submit">SIGN IN</button></p>
           <p><button class="w3-button w3-teal" type="button" onclick="window.location.href='register.php'">REGISTER</button></p>
           <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -396,7 +396,7 @@ session_start();
   </div>
   <?php
   $email = $password = "";
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (isset($_POST["login"])) {
     $validation = true;
     if (empty($_POST["email"])) {
       $emailErr = "Email is required";
@@ -418,7 +418,9 @@ session_start();
       $sql = "SELECT customerid, firstname FROM customer WHERE email='$email' and password='$encPasswordd'";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
+        $row = mysqli_fetch_assoc($result);
         echo "login success";
+        $_SESSION["customerid"] = $row["customerid"];
       } else {
         echo 'password or email incorrect';
       }
@@ -436,6 +438,43 @@ session_start();
     $data = htmlspecialchars($data);
     return $data;
   }
+  ?>
+
+  <!-- Modal -->
+<?php
+
+
+    $sql = "SELECT * from car";
+    $result = $conn->query($sql);
+    $carhtml = "";
+    $counter = 1;
+    while($row = mysqli_fetch_assoc($result)) {
+      $carid = $row["carid"];
+      $detailid = $row["detailsid"];
+      $detailsql = "SELECT * FROM cardetails WHERE detailsid=" . $detailid;
+      $resultdetail = $conn->query($detailsql);
+      $detailrow = mysqli_fetch_assoc($resultdetail);
+
+      $carhtml = $carhtml . "<div class='w3-third w3-margin-bottom w3-card-2 w3-hover-opacity'>\
+      <img src='img/car-rent-" . $counter . ".png' style='width:100%'>\
+      <div class='w3-container w3-white'>\
+        <h3>" . $row["brandname"] . " " . $row["modelname"] . "</h3>\
+        <h6 class='w3-opacity'>From ".$detailrow["dailyprice"]."</h6>\
+        <label style='width: 100px;'><i class='fa fa-car'></i> ".$detailrow["numberofdoors"]."</label>\
+        <label style='width: 100px;'><i class='fa fa-car'></i> ".$detailrow["geartype"]."</label>\
+        <label><i class='fa fa-car'></i> ".$detailrow["numberofseat"]."</label>\
+        <button class='w3-button w3-block w3-black w3-margin-bottom'>Rent Car</button>\
+      </div>\
+    </div>";
+    $counter = $counter + 1;
+      if ($counter > 6) {
+        break;
+      }
+    }
+    echo "<script>
+    document.getElementById('popularcars').innerHTML =\"$carhtml\";
+  </script>";
+
   ?>
 
 
