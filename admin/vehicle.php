@@ -57,7 +57,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <!-- Header -->
   <header class="w3-container" style="padding-top:60px">
     <h5><b>VEHICLES</b></h5>
-    <a href="car_settings.php" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Add New Car </a>
+    <a href="car_settingsadd.php" class="w3-button w3-teal w3-padding-large"><i class="fa fa-cog"></i> Add New Car </a>
   </header>
 
   <div id="cars" class="w3-row-padding w3-center w3-padding-16" >
@@ -68,7 +68,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   $sql = "SELECT * from car";
   $result = $conn->query($sql);
   $carstring = "";
-  $img = 1;
+  
   while($row = mysqli_fetch_assoc($result)) {
    $carid=$row["carid"];
     $sqlcardetails="SELECT * FROM cardetails where detailsid=" . $row["detailsid"];
@@ -77,7 +77,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         $carstring = $carstring . "<div class='w3-third w3-margin-bottom'>\
         <ul class='w3-ul w3-border w3-hover-shadow'>\
           <li class='w3-theme'>\
-          <img src='../img/car-rent-". $img . ".png' style='width:100%'>\
+          <img src='" . $row["image"] . "' style='width:100%'>\
           </li>\
           <li class='w3-padding-16'><b>". $row["brandname"] . " - " .$row["modelname"] ."</b> </li>\
           <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
@@ -89,15 +89,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             <span class='w3-opacity'>per day</span>\
           </li>\
           <li class='w3-theme-l5 w3-padding-24'>\
-          <form><a href='car_settings.php' class='w3-button w3-teal w3-padding-large'><i class='fa fa-cog'></i> Update</a>\
+          <form><a href='car_settingsupdate.php?carid=" . $carid . "' class='w3-button w3-teal w3-padding-large'><i class='fa fa-cog'></i> Update</a>\
           <button name='delete' type='submit' value='". $carid ."' class='w3-button w3-red w3-padding-large'><i class='fa fa-close'></i> Delete</button></form>\
         </li>\
         </ul>\
       </div> ";
-      $img =  $img + 1;
-      if ($img == 7) {
-        $img = 1;
-      }
+     
   }
   echo "<script>
     document.getElementById('cars').innerHTML =\"$carstring\";
