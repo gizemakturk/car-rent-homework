@@ -1,5 +1,6 @@
 <?php
 include '../connect.php';
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,47 +58,62 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <!-- Header -->
   <div class="w3-container w3-margin-top">
     <?php
-    $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $parts = parse_url($url);
-    parse_str($parts['query'], $query);
-    $carid =  $query['carid'];
-  $sql = "SELECT * from car where carid=". $carid;
+    $brandname=$modelname=$image=$carid=$detailsid=$numberofdoors=$numberofseat=$capacityofluggage=$geartype=$dailyprice=" ";
+    if($_SERVER["REQUEST_METHOD"]=="GET"){
+  //  $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+  //  $parts = parse_url($url);
+  //  parse_str($parts['query'], $query);
+  $carid =$_SESSION["carid"] = $_GET['carid'];
+  $sql = "SELECT * from car where carid=". $_SESSION["carid"] ;
   $result = $conn->query($sql);
   $row = mysqli_fetch_assoc($result);
-  ?>
+  $brandname=$_SESSION["brandname"]=$row['brandname'];
+  $modelname=$_SESSION['modelname']=$row['modelname'];
+  $image=$_SESSION['image']=$row['image'];
+  $detailsid=$_SESSION['detailsid']=$row['detailsid'];
+  $sqlupdatedetail="SELECT * FROM cardetails WHERE detailsid=".$_SESSION['detailsid'];
+  $result = $conn->query($sqlupdatedetail);
+  $row1 = mysqli_fetch_assoc($result);
+  $numberofseat=$_SESSION['numberofseat']=$row1['numberofseat'];
+  $numberofdoors=$_SESSION['numberofdoors']=$row1['numberofdoors'];
+  $capacityofluggage=$_SESSION['capacityofluggage']=$row1['capacityofluggage'];
+  $geartype=$_SESSION['geartype']=$row1['geartype'];
+  $dailyprice=$_SESSION['dailyprice']=$row1['dailyprice'];
+}
+ ?>
  
-  <form name="formcars" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+  <form name="add" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <div class="container">
     <h1>Settings</h1>
-    <img src= '<?php echo $row["image"] ?>'   width="30%" height="50%"><br><br>
+    <img src= '<?php echo  $image ?>'   width="30%" height="50%"><br><br>
      
      
       <hr>
       <i class="fa fa-image"></i> <label for="img"><b> Add Image</b></label>
-      <input name="img" type="text"  placeholder="Add Image" required >
+      <input name="img" type="text"  placeholder="Add Image" required value="<?php echo  $image ?>">
 
       <label for="model"><b>Car Model</b></label>
-      <input name="model" type="text" placeholder="Car Name" required>
+      <input name="model" type="text" placeholder="Car Name" required  value="<?php echo  $modelname ?>">
   
       <label for="brand"><b>Car Brand</b></label>
-      <input name="brand" type="text" placeholder="Car Brand"  required>
+      <input name="brand" type="text" placeholder="Car Brand"  required  value="<?php echo  $brandname ?>">
   
       <label for="seat"><b>Car Number of Seat</b></label>
-      <input name="seat" type="text" placeholder="Car Number of Seat" required>
+      <input name="seat" type="text" placeholder="Car Number of Seat" required  value="<?php echo $numberofseat?>">
   
       <label for="doors"><b>Car Number of Doors</b></label>
-      <input name="doors" type="text" placeholder="Car Number of Doors" required>
+      <input name="doors" type="text" placeholder="Car Number of Doors" required  value="<?php echo $numberofdoors ?>">
 
       <label for="luggage"><b>Car Capatiy of Luggage</b></label>
-      <input name="luggage" type="text" placeholder="Car Capatiy of Luggage" required>
+      <input name="luggage" type="text" placeholder="Car Capatiy of Luggage" required  value="<?php echo $capacityofluggage ?>">
 
       <label for="gear"><b>Car Gear Type</b></label>
-      <input name="gear" type="text" placeholder="Car Gear Type" required>
+      <input name="gear" type="text" placeholder="Car Gear Type" required  value="<?php echo $geartype ?>">
       
       <label for="price"><b>Car Daily Price</b></label>
-      <input name="price" type="text" placeholder="Car Daily Price" required>
+      <input name="price" type="text" placeholder="Car Daily Price" required  value="<?php echo $dailyprice ?>">
       <hr>
-      <button name="add" class="w3-button w3-teal" type="submit" class="registerbtn">Add Car</button>
+      <button name="add" class="w3-button w3-teal" type="submit" class="registerbtn">Update Car</button>
     </div>
     
   </form>
@@ -105,16 +121,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <?php 
   require_once "../connect.php";
-  $fnameErr = $addressErr = $emailErr = $cityErr = $stateErr= $zipErr=$cardnameErr= $cardnumberErr = $expmonthErr = $expyearErr= $cvvErr="";
-  $fname = $email = $address =$city= $state=$zip= $cardname = $cardnumber = $expmonth =$expyear= $cvv="";
+ 
   if (isset($_POST['add'])) {  
     $validation = true;
     if (empty($_POST["model"])) {
       $modelErr = "Model is required";
       $validation = false;
     } else {
-      $model = test_input($_POST["model"]);
-  
+      $model =test_input( $_POST["model"]);
+      
       // check if name only contains letters and whitespace
       if (!preg_match("/^[a-zA-Z-' ]*$/",$model)) {
         $modelErr = "Only letters and white space allowed";
@@ -206,21 +221,19 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         $validation = false;
       }
     }
-    $sqladddetail="INSERT INTO cardetails (numberofseat,numberofdoors,capatiyofluggage,geartype,dailyprice)
-    VALUES ('$seat','$doors','$luggage','$gear','$price')";
-        if ($conn->query($sqladddetail) === TRUE) {
-          $adddetailid =mysqli_insert_id($conn);
-          $caraddsql="INSERT INTO car (modelname,brandname,detailsid,image)
-          VALUES ('$model','$brand',$adddetailid,'$img')";
-          if ($conn->query($caraddsql) === TRUE) {
-            echo '<script>window.location.href="vehicle.php"</script>';
-          }
-          
-          
-      } else {
-          echo "Error: " . $sqladddetail . "<br>" . $conn->error;
-      }
+   var_dump($_SESSION['carid']);
+  $sqlupdate="UPDATE car SET modelname='". $model ."', brandname='" . $brand."',image='". $img ."' WHERE carid=" . $_SESSION['carid']  ;
+  var_dump($sqlupdate);
+  if ($conn->query($sqlupdate) === TRUE) {
+    $sqlupdatedetailcar="UPDATE cardetails SET numberofseat=". $seat .", numberofdoors=" . $doors.
+    ",capacityofluggage=". $luggage .",geartype='". $gear ." ',dailyprice=". $price ." WHERE detailsid=" . $_SESSION['detailsid'];
+   var_dump($sqlupdatedetailcar);
+    if ($conn->query($sqlupdatedetailcar) === TRUE) {
+     echo "<script>window.location.href='vehicle.php'; </script>";
+    }
+     }
   }
+
   function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);

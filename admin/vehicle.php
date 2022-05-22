@@ -82,7 +82,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
           <li class='w3-padding-16'><b>". $row["brandname"] . " - " .$row["modelname"] ."</b> </li>\
           <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
           <li class='w3-padding-16'><b>" . $detailrow["numberofdoors"] . "</b> Number of Doors</li>\
-          <li class='w3-padding-16'><b>" . $detailrow["capatiyofluggage"] . "</b> Capacity of Luggage</li>\
+          <li class='w3-padding-16'><b>" . $detailrow["capacityofluggage"] . "</b> Capacity of Luggage</li>\
           <li class='w3-padding-16'><b>" . $detailrow["geartype"] . "</b> Gear Type </li>\
           <li class='w3-padding-16'>\
             <h2 class='w3-wide'><i class='fa fa-usd'></i> 10</h2>\
