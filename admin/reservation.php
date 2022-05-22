@@ -1,3 +1,6 @@
+<?php
+include '../connect.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,34 +94,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <th>Price</th>
       <th></th>
     </tr>
-    <tr>
-      <td>Gizem Aktürk</td>
-      <td>Mercedes Benz</td>
-      <td>12.03.2022 - 19.03.2022</td>
-      <td>670 TL</td>
-      <td><button  onclick="document.getElementById('info').style.display='block'" class="w3-button w3-green w3-padding-small"><i class="fa fa-tasks"></i> Info</button><button class="w3-button w3-red w3-padding-small"><i class="fa fa-close"></i> Delete</button></td>
-    </tr>
-    <tr>
-      <td>Gizem Aktürk</td>
-      <td>Mercedes Benz</td>
-      <td>12.03.2022 - 19.03.2022</td>
-      <td>670 TL</td>
-      <td><button  onclick="document.getElementById('info').style.display='block'" class="w3-button w3-green w3-padding-small"><i class="fa fa-tasks"></i> Info</button><button class="w3-button w3-red w3-padding-small"><i class="fa fa-close"></i> Delete</button></td>
-   </tr>
-    <tr>
-      <td>Gizem Aktürk</td>
-      <td>Mercedes Benz</td>
-      <td>12.03.2022 - 19.03.2022</td>
-      <td>670 TL</td>
-      <td><button  onclick="document.getElementById('info').style.display='block'" class="w3-button w3-green w3-padding-small"><i class="fa fa-tasks"></i> Info</button><button class="w3-button w3-red w3-padding-small"><i class="fa fa-close"></i> Delete</button></td>
-    </tr>
-    <tr>
-      <td>Gizem Aktürk</td>
-      <td>Mercedes Benz</td>
-      <td>12.03.2022 - 19.03.2022</td>
-      <td>670 TL</td>  
-      <td><button  onclick="document.getElementById('info').style.display='block'" class="w3-button w3-green w3-padding-small"><i class="fa fa-tasks"></i> Info</button><button class="w3-button w3-red w3-padding-small"><i class="fa fa-close"></i> Delete</button></td>
-    </tr>  
+  <tbody id="reservations">
+  </tbody>
   </table>
   </div>
   <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
@@ -133,7 +110,55 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <p>Information about the rezervation.</p><br>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
       </p>
+        <?php 
+        if(isset($_GET["delete"])){
+          $deletesql="DELETE FROM rent WHERE rentid=".$_GET["delete"];
+          if ($conn->query($deletesql) === TRUE) {
+            echo "Delete  successfully";
+            
+            
+        } else {
+            echo "Error: " . $deletesql . "<br>" . $conn->error;
+        }
+        }
+         $sqlrent="SELECT * FROM rent";
+         $result = $conn->query($sqlrent);
+         $tablereservation = "";
+        while($row = mysqli_fetch_assoc($result)) {
+        $customerid=$row["customerid"];
+        $carid=$row["carid"];
+        $date=$row["startdate"]."     ".$row["enddate"];
+        $invoinceid=$row["invoinceid"];
+        $sqlcustomer="SELECT firstname,lastname FROM customer WHERE customerid=".$customerid;
+        $result1 = $conn->query($sqlcustomer);
+        $row1 = mysqli_fetch_assoc($result1);
+        $fname=$row1["firstname"];
+        $lname=$row1["lastname"];
+        $sqlcar="SELECT modelname,brandname FROM car WHERE carid=" . $carid;
+        $result2 = $conn->query($sqlcar);
+        $row2 = mysqli_fetch_assoc($result2);
+        $bname=$row2["brandname"];
+        $mname=$row2["modelname"];
+        $sqlinvoice="SELECT amount FROM invoince WHERE invoiceid=" . $invoinceid;
+        $result3 = $conn->query($sqlinvoice);
+        $row3 = mysqli_fetch_assoc($result3);
+        $amount=$row3["amount"];
+
+        $tablereservation = $tablereservation . "<tr>\
+        <td>".$fname . " " . $lname."</td>\
+        <td>" . $bname . " " . $mname."</td>\
+        <td>".$date."</td>\
+        <td>".$amount."</td>\
+        <td><form><button  onclick='showInfo();' class='w3-button w3-green w3-padding-small'><i class='fa fa-tasks'></i> Info</button>\
+        <button name='delete' onclick='reload();' type='submit' value='". $row["rentid"] ."' class='w3-button w3-red w3-padding-small'><i class='fa fa-close'></i> Delete</button></form></td>\
+      </tr>";
+        }
         
+        echo "<script>
+        document.getElementById('reservations').innerHTML =\"$tablereservation\";
+      </script>";
+
+        ?>
       </div>
     </div>
   </div>
@@ -162,6 +187,12 @@ function w3_open() {
     mySidebar.style.display = 'block';
     overlayBg.style.display = "block";
   }
+}
+function showInfo() {
+  document.getElementById('info').style.display='block';
+}
+function reload() {
+  window.location.reload();
 }
 
 // Close the sidebar with the close button
