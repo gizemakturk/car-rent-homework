@@ -136,7 +136,17 @@ session_start();
     <a href="about.php" class="w3-bar-item w3-button w3-mobile">About</a>
     <a href="services.php" class="w3-bar-item w3-button w3-mobile">Services</a>
     <a href="contact.php" class="w3-bar-item w3-button w3-mobile">Contact</a>
-    <a button onclick="document.getElementById('contact').style.display='block'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>
+    <?php if(!isset ($_SESSION["customerid"])){
+   echo '<a onclick="document.getElementById(\'contact\').style.display=\'block\'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>';
+  }else{
+    $sqlcustomer="SELECT firstname, lastname FROM customer WHERE customerid=" .$_SESSION["customerid"];
+    $result = $conn->query($sqlcustomer);
+    if ($result->num_rows > 0) {
+      $row = mysqli_fetch_assoc($result);}
+    echo '<a  onclick="document.getElementById(\'contact\').style.display=\'block\'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">'.$row['firstname'].' '.$row['lastname'].'</a>';
+
+  }
+  ?>
     <div class="carousel-inner">
       <div class="item active">
         <img src="img/carousel-2.jpg" alt="New York" width="2000" height="700">
@@ -270,16 +280,15 @@ session_start();
 
       if ($result == false) {
       } else if ($result->num_rows > 0) {
-        $img = 1;
+       
         while ($row = mysqli_fetch_assoc($result)) {
-          echo "id: " . $row["carid"] . " - model: " . $row["modelname"] . "<br>";
           $sqlcardetails = "SELECT * FROM cardetails where detailsid=" . $row["detailsid"];
           $detailresult = $conn->query($sqlcardetails);
           $detailrow = mysqli_fetch_assoc($detailresult);
           $carstring = $carstring . "<div class='w3-third w3-margin-bottom'>\
         <ul class='w3-ul w3-border w3-hover-shadow'>\
           <li class='w3-theme'>\
-            <img src='img/car-rent-" . $img . ".png' style='width:100%'>\
+            <img src='". $row["image"]. "' style='width:100%'>\
           </li>\
           <li class='w3-padding-16'><b>" . $row["brandname"] . " - " . $row["modelname"] . "</b> </li>\
           <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
@@ -295,7 +304,7 @@ session_start();
           </li>\
         </ul>\
       </div> ";
-          $img =  $img + 1;
+        
         }
       } else {
         echo 'araba yok';

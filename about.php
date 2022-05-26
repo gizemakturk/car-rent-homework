@@ -1,3 +1,11 @@
+<?php
+include 'connect.php';
+session_start();
+$sql="UPDATE views SET number = number + 1 WHERE viewsid=1";
+if ($conn->query($sql) === TRUE) {
+ }
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +36,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   <a href="about.php" class="w3-bar-item w3-button w3-mobile">About</a>
   <a href="services.php" class="w3-bar-item w3-button w3-mobile">Services</a>
   <a href="contact.php" class="w3-bar-item w3-button w3-mobile">Contact</a>
-  <a button onclick="document.getElementById('contact').style.display='block'"class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>
+  <?php if(!isset ($_SESSION["customerid"])){
+   echo '<a onclick="document.getElementById(\'contact\').style.display=\'block\'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>';
+  }else{
+    $sqlcustomer="SELECT firstname, lastname FROM customer WHERE customerid=" .$_SESSION["customerid"];
+    $result = $conn->query($sqlcustomer);
+    if ($result->num_rows > 0) {
+      $row = mysqli_fetch_assoc($result);}
+    echo '<a  onclick="document.getElementById(\'contact\').style.display=\'block\'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">'.$row['firstname'].' '.$row['lastname'].'</a>';
+
+  }
+  ?>
   <!-- Wrapper for slides -->
    <div class="carousel-inner">
     <div class="item active">

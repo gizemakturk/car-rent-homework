@@ -3,8 +3,8 @@ include 'connect.php';
 session_start();
 $sql="UPDATE views SET number = number + 1 WHERE viewsid=1";
 if ($conn->query($sql) === TRUE) {
- 
-}
+ }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,6 +35,52 @@ if ($conn->query($sql) === TRUE) {
 </head>
 
 <body class="w3-light-grey">
+<?php
+  $email = $password = "";
+  if (isset($_POST["login"])) {
+    $validation = true;
+    if (empty($_POST["email"])) {
+      $emailErr = "Email is required";
+      $validation = false;
+    } else {
+      $email = test_input($_POST["email"]);
+
+      // check if e-mail address is well-formed
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email format";
+        $validation = false;
+      }
+    }
+
+    $password = $_POST["password"];
+      if ($validation) {
+      $encPasswordd = md5($password);
+      $sql = "SELECT customerid, firstname FROM customer WHERE email='$email' and password='$encPasswordd'";
+      $result = $conn->query($sql);
+      
+      if ($result->num_rows > 0) {
+        $row = mysqli_fetch_assoc($result);
+        echo "login success";
+        $_SESSION["customerid"] = $row["customerid"];
+      } else {
+        echo 'password or email incorrect';
+      }
+
+
+     // $conn->close();
+    } else {
+      echo "something wrong";
+    }
+  }
+  function test_input($data)
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+  ?>
+
 
   <!-- Navigation Bar -->
   <div class="w3-bar w3-white w3-large">
@@ -43,7 +89,17 @@ if ($conn->query($sql) === TRUE) {
     <a href="about.php" class="w3-bar-item w3-button w3-mobile">About</a>
     <a href="services.php" class="w3-bar-item w3-button w3-mobile">Services</a>
     <a href="contact.php" class="w3-bar-item w3-button w3-mobile">Contact</a>
-    <a button onclick="document.getElementById('contact').style.display='block'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>
+   <?php if(!isset ($_SESSION["customerid"])){
+   echo '<a onclick="document.getElementById(\'contact\').style.display=\'block\'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Sign In</a>';
+  }else{
+    $sqlcustomer="SELECT firstname, lastname FROM customer WHERE customerid=" .$_SESSION["customerid"];
+    $result = $conn->query($sqlcustomer);
+    if ($result->num_rows > 0) {
+      $row = mysqli_fetch_assoc($result);}
+    echo '<a  onclick="document.getElementById(\'contact\').style.display=\'block\'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">'.$row['firstname'].' '.$row['lastname'].'</a>';
+
+  }
+  ?>
   </div>
   <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <div class="w3-row-padding">
@@ -219,89 +275,6 @@ if ($conn->query($sql) === TRUE) {
     <div class="container pt-5 pb-3">
       <h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>
       <div class="w3-row-padding w3-padding-16" id="popularcars">
-        <div class="w3-third w3-margin-bottom w3-card-2 w3-hover-opacity">
-          <img src="img/car-rent-1.png" alt="Norway" style="width:100%">
-          <div class="w3-container w3-white">
-            <h3>MERCEDES BENZ </h3>
-            <h6 class="w3-opacity">From $99</h6>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> 2015</label>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> AUTO</label>
-
-            <label><i class="fa fa-car"></i> 25K</label>
-            <button onclick = "document.getElementById('popularcar').style.display='block'" class="w3-button w3-block w3-black w3-margin-bottom">Rent Car</button>
-          </div>
-        </div>
-        <div class="w3-third w3-margin-bottom w3-card-2 w3-hover-opacity">
-          <img src="img/car-rent-6.png" style="width:100%">
-          <div class="w3-container w3-white">
-            <h3>MERCEDES BENZ </h3>
-            <h6 class="w3-opacity">From $99</h6>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> 2015</label>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> AUTO</label>
-
-            <label><i class="fa fa-car"></i> 25K</label>
-            <button class="w3-button w3-block w3-black w3-margin-bottom">Rent Car</button>
-          </div>
-        </div>
-        <div class="w3-third w3-margin-bottom w3-card-2 w3-hover-opacity">
-          <img src="img/car-rent-5.png" style="width:100%">
-          <div class="w3-container w3-white">
-            <h3>MERCEDES BENZ </h3>
-            <h6 class="w3-opacity">From $99</h6>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> 2015</label>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> AUTO</label>
-
-            <label><i class="fa fa-car"></i> 25K</label>
-            <button class="w3-button w3-block w3-black w3-margin-bottom">Rent Car</button>
-          </div>
-        </div>
-        <div class="w3-third w3-margin-bottom w3-card-2 w3-hover-opacity">
-          <img src="img/car-rent-4.png" alt="Norway" style="width:100%">
-          <div class="w3-container w3-white">
-            <h3>MERCEDES BENZ </h3>
-            <h6 class="w3-opacity">From $99</h6>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> 2015</label>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> AUTO</label>
-
-            <label><i class="fa fa-car"></i> 25K</label>
-            <button class="w3-button w3-block w3-black w3-margin-bottom">Rent Car</button>
-          </div>
-        </div>
-        <div class="w3-third w3-margin-bottom w3-card-2 w3-hover-opacity">
-          <img src="img/car-rent-3.png" alt="Norway" style="width:100%">
-          <div class="w3-container w3-white">
-            <h3>MERCEDES BENZ </h3>
-            <h6 class="w3-opacity">From $99</h6>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> 2015</label>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> AUTO</label>
-
-            <label><i class="fa fa-car"></i> 25K</label>
-            <button class="w3-button w3-block w3-black w3-margin-bottom">Rent Car</button>
-          </div>
-        </div>
-        <div class="w3-third w3-margin-bottom w3-card-2 w3-hover-opacity">
-          <img src="img/car-rent-2.png" style="width:100%">
-          <div class="w3-container w3-white">
-            <h3>MERCEDES BENZ </h3>
-            <h6 class="w3-opacity">From $99</h6>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> 2015</label>
-
-            <label style="width: 100px;"><i class="fa fa-car"></i> AUTO</label>
-
-            <label><i class="fa fa-car"></i> 25K</label>
-            <button class="w3-button w3-block w3-black w3-margin-bottom">Rent Car</button>
-          </div>
         </div>
 
       </div>
@@ -398,52 +371,7 @@ if ($conn->query($sql) === TRUE) {
 
     </div>
   </div>
-  <?php
-  $email = $password = "";
-  if (isset($_POST["login"])) {
-    $validation = true;
-    if (empty($_POST["email"])) {
-      $emailErr = "Email is required";
-      $validation = false;
-    } else {
-      $email = test_input($_POST["email"]);
-
-      // check if e-mail address is well-formed
-      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
-        $validation = false;
-      }
-    }
-
-    $password = $_POST["password"];
-
-    if ($validation) {
-      $encPasswordd = md5($password);
-      $sql = "SELECT customerid, firstname FROM customer WHERE email='$email' and password='$encPasswordd'";
-      $result = $conn->query($sql);
-      if ($result->num_rows > 0) {
-        $row = mysqli_fetch_assoc($result);
-        echo "login success";
-        $_SESSION["customerid"] = $row["customerid"];
-      } else {
-        echo 'password or email incorrect';
-      }
-
-
-      $conn->close();
-    } else {
-      echo "something wrong";
-    }
-  }
-  function test_input($data)
-  {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-  ?>
-
+  
   <!-- Modal -->
 <?php
 
@@ -460,7 +388,7 @@ if ($conn->query($sql) === TRUE) {
       $detailrow = mysqli_fetch_assoc($resultdetail);
 
       $carhtml = $carhtml . "<div class='w3-third w3-margin-bottom w3-card-2 w3-hover-opacity'>\
-      <img src='img/car-rent-" . $counter . ".png' style='width:100%'>\
+      <img src='".$row['image']."' style='width:100%'>\
       <div class='w3-container w3-white'>\
         <h3>" . $row["brandname"] . " " . $row["modelname"] . "</h3>\
         <h6 class='w3-opacity'>From ".$detailrow["dailyprice"]."</h6>\
