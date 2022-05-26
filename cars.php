@@ -165,6 +165,9 @@ session_start();
       <div class="row">
         <div class="col-75">
           <div class="container">
+            <div class="row" id="carrent">
+              <div class="col-50">DENEME</div>
+            </div>
             <form name="formcars" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
               <div class="row">
@@ -230,7 +233,41 @@ session_start();
         </div>
       </div>
     </div>
+    
+    <?php
 
+      $caridrent=$_POST["review"];
+
+    
+    $caridsql="SELECT * FROM car WHERE carid=".$caridrent;
+    $carrent1 = $conn->query($caridsql);
+    $caridrow1 = mysqli_fetch_assoc($carrent1);
+    $sqldetails = "SELECT dailyprice FROM cardetails WHERE detailsid=" . $caridrow1["detailsid"];
+          $detailresult = $conn->query($sqldetails);
+          $detailrow = mysqli_fetch_assoc($detailresult);
+        $diff = date_diff(date_create($pickupdate), date_create($dropdate));
+
+          $amount = $diff->format("%a") * $detailrow["dailyprice"];
+    if(isset($_SESSION["pickup-location"])){
+      $locations = ["Ankara", "Antalya", "Izmir", "Istanbul"];
+        $pickuplocation = $locations[$_SESSION["pickup-location"]];
+        $droplocation = $locations[$_SESSION["drop-location"]];
+      $pickupdate = $_SESSION["pickup-date"];
+      $dropdate = $_SESSION["drop-date"];
+    
+    $carrenthtml = "<div class=\'col-50\'><h1>Selected Car</h1><img src=\'". $caridrow1["image"]. "\' style=\'width:100%\'></div><div class=\'col-50\'><h1>". $caridrow1["brandname"]. " ". $caridrow1["modelname"]. "</h1>\
+    <h2> " . $pickuplocation . " & " .  $droplocation  .  "</h2>\
+    <h2> " . $pickupdate . " & " .  $dropdate  .  "</h2>\
+    <h2> " . $amount  .  "</h2>\
+    </div>";
+
+   
+    echo "<script>
+    document.getElementById('carrent').innerHTML ='" . $carrenthtml ."';
+  </script>";
+    }
+  
+    ?>
 
     <!-- Modal -->
     <div id="contact" class="w3-modal">
@@ -263,65 +300,104 @@ session_start();
     <?php
     $pickuplocation = $droplocation = $pickupdate = $dropdate = $selectcar = "";
     $pickuplocationErr = $droplocationErr = $pickupdateErr = $dropdateErr = $selectcarErr = "";
-
+    $selectcararr= $_SESSION["brands"];
+    $selectcar = $selectcararr[$_SESSION["select-car"]];
     $validation = true;
-    $pickuplocation = $_SESSION["pickup-location"];
-    $droplocation = $_SESSION["drop-location"];
-    $pickupdate = $_SESSION["pickup-date"];
-    $dropdate = $_SESSION["drop-date"];
-    $selectcar = $_SESSION["select-car"];
-
-
-    if ($validation) {
-      $sql = "SELECT * from car where not exists (select r.carid from rent r where $pickupdate between r.startdate and r.enddate )";
-      $result = $conn->query($sql);
-      $carstring = "<h2>CARS</h2>\
+    $carstring = "<h2>CARS</h2>\
     <p>Choose a service that helps your needs.</p><br>";
-
-      if ($result == false) {
-      } else if ($result->num_rows > 0) {
-       
-        while ($row = mysqli_fetch_assoc($result)) {
-          $sqlcardetails = "SELECT * FROM cardetails where detailsid=" . $row["detailsid"];
-          $detailresult = $conn->query($sqlcardetails);
-          $detailrow = mysqli_fetch_assoc($detailresult);
-          $carstring = $carstring . "<div class='w3-third w3-margin-bottom'>\
-        <ul class='w3-ul w3-border w3-hover-shadow'>\
-          <li class='w3-theme'>\
-            <img src='". $row["image"]. "' style='width:100%'>\
-          </li>\
-          <li class='w3-padding-16'><b>" . $row["brandname"] . " - " . $row["modelname"] . "</b> </li>\
-          <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
-          <li class='w3-padding-16'><b>" . $detailrow["numberofdoors"] . "</b> Number of Doors</li>\
-          <li class='w3-padding-16'><b>" . $detailrow["capacityofluggage"] . "</b> Capacity of Luggage</li>\
-          <li class='w3-padding-16'><b>" . $detailrow["geartype"] . "</b> Gear Type </li>\
-          <li class='w3-padding-16'>\
-            <h2 class='w3-wide'><i class='fa fa-usd'></i> " . $detailrow["dailyprice"] . "</h2>\
-            <span class='w3-opacity'>per day</span>\
-          </li>\
-          <li class='w3-theme-l5 w3-padding-24'>\
-            <button id='" . $row["carid"] . "' type='button' onclick='rent(this.id);' class='w3-button w3-teal w3-padding-large'><i class='fa fa-check'></i> Rent</button>\
-          </li>\
-        </ul>\
-      </div> ";
-        
+    if(isset($_SESSION["pickup-location"])){
+      $pickuplocation = $_SESSION["pickup-location"];
+      $droplocation = $_SESSION["drop-location"];
+      $pickupdate = $_SESSION["pickup-date"];
+      $dropdate = $_SESSION["drop-date"];
+      if ($validation) {
+        if($selectcar=="ALL"){
+        $sql = "SELECT * from car where carid NOT IN (select r.carid from rent r where '$pickupdate' between r.startdate and r.enddate )";
+         }else{
+          $sql = "SELECT * from car where carid NOT IN (select r.carid from rent r where '$pickupdate' between r.startdate and r.enddate ) and brandname='".$selectcar."'";
+         }
+          $result = $conn->query($sql);
+        $carstring = "<h2>CARS</h2>\
+      <p>Choose a service that helps your needs.</p><br>";
+  
+        if ($result == false) {
+        } else if ($result->num_rows > 0) {
+         
+          while ($row = mysqli_fetch_assoc($result)) {
+            $sqlcardetails = "SELECT * FROM cardetails where detailsid=" . $row["detailsid"];
+            $detailresult = $conn->query($sqlcardetails);
+            $detailrow = mysqli_fetch_assoc($detailresult);
+            $carstring = $carstring . "<div class='w3-third w3-margin-bottom'>\
+          <ul class='w3-ul w3-border w3-hover-shadow'>\
+            <li class='w3-theme'>\
+              <img src='". $row["image"]. "' style='width:100%'>\
+            </li>\
+            <li class='w3-padding-16'><b>" . $row["brandname"] . " - " . $row["modelname"] . "</b> </li>\
+            <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
+            <li class='w3-padding-16'><b>" . $detailrow["numberofdoors"] . "</b> Number of Doors</li>\
+            <li class='w3-padding-16'><b>" . $detailrow["capacityofluggage"] . "</b> Capacity of Luggage</li>\
+            <li class='w3-padding-16'><b>" . $detailrow["geartype"] . "</b> Gear Type </li>\
+            <li class='w3-padding-16'>\
+              <h2 class='w3-wide'><i class='fa fa-usd'></i> " . $detailrow["dailyprice"] . "</h2>\
+              <span class='w3-opacity'>per day</span>\
+            </li>\
+            <li class='w3-theme-l5 w3-padding-24'>\
+              <form method='post'><button id='" . $row["carid"] . "' value = '" . $row["carid"] . "' type='button' name='review' onclick='rent(this.id);' class='w3-button w3-teal w3-padding-large'><i class='fa fa-check'></i> Rent</button></form>\
+            </li>\
+          </ul>\
+        </div> ";
+          
+          }
+        } else {
+          echo 'araba yok';
         }
+  
+      
       } else {
-        echo 'araba yok';
+        echo "something wrong";
       }
-
-      echo "<script>
+    }else{
+      $sqlallcars="SELECT * FROM car";
+      $result = $conn->query($sqlallcars);
+     
+      while ($row = mysqli_fetch_assoc($result)) {
+        $sqlcardetails = "SELECT * FROM cardetails where detailsid=" . $row["detailsid"];
+        $detailresult = $conn->query($sqlcardetails);
+        $detailrow = mysqli_fetch_assoc($detailresult);
+        $carstring = $carstring . "<div class='w3-third w3-margin-bottom'>\
+      <ul class='w3-ul w3-border w3-hover-shadow'>\
+        <li class='w3-theme'>\
+          <img src='". $row["image"]. "' style='width:100%'>\
+        </li>\
+        <li class='w3-padding-16'><b>" . $row["brandname"] . " - " . $row["modelname"] . "</b> </li>\
+        <li class='w3-padding-16'><b>" . $detailrow["numberofseat"] . "</b> Number of Seat</li>\
+        <li class='w3-padding-16'><b>" . $detailrow["numberofdoors"] . "</b> Number of Doors</li>\
+        <li class='w3-padding-16'><b>" . $detailrow["capacityofluggage"] . "</b> Capacity of Luggage</li>\
+        <li class='w3-padding-16'><b>" . $detailrow["geartype"] . "</b> Gear Type </li>\
+        <li class='w3-padding-16'>\
+          <h2 class='w3-wide'><i class='fa fa-usd'></i> " . $detailrow["dailyprice"] . "</h2>\
+          <span class='w3-opacity'>per day</span>\
+        </li>\
+      </ul>\
+    </div> ";
+      
+      }
+    }
+    echo "<script>
     document.getElementById('pricing').innerHTML =\"$carstring\";
   </script>";
-    } else {
-      echo "something wrong";
-    }
+
+
+   
 
     ?>
+    
     <?php
     require_once "connect.php";
     $fnameErr = $addressErr = $emailErr = $cityErr = $stateErr = $zipErr = $cardnameErr = $cardnumberErr = $expmonthErr = $expyearErr = $cvvErr = "";
     $fname = $email = $address = $city = $state = $zip = $cardname = $cardnumber = $expmonth = $expyear = $cvv = "";
+
+    
     if (isset($_POST['formcars'])) {
       $validation = true;
       if (empty($_POST["firstname"])) {
@@ -465,7 +541,7 @@ session_start();
         $droplocation = $locations[$_SESSION["drop-location"]];
         $pickupdate = $_SESSION["pickup-date"];
         $dropdate = $_SESSION["drop-date"];
-        $selectcar = $_SESSION["select-car"];
+       
         echo $pickupdate;
         $diff = date_diff(date_create($pickupdate), date_create($dropdate));
         if (isset($_POST["formcars"])) {

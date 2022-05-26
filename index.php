@@ -79,8 +79,10 @@ if ($conn->query($sql) === TRUE) {
     $data = htmlspecialchars($data);
     return $data;
   }
-  ?>
+  
 
+
+  ?>
 
   <!-- Navigation Bar -->
   <div class="w3-bar w3-white w3-large">
@@ -96,7 +98,7 @@ if ($conn->query($sql) === TRUE) {
     $result = $conn->query($sqlcustomer);
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);}
-    echo '<a  onclick="document.getElementById(\'contact\').style.display=\'block\'" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">'.$row['firstname'].' '.$row['lastname'].'</a>';
+    echo '<a href="customer.php" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">'.$row['firstname'].' '.$row['lastname'].'</a>';
 
   }
   ?>
@@ -130,13 +132,10 @@ if ($conn->query($sql) === TRUE) {
         <label><i class="fa fa-calendar-o"></i> Drop Date </label>
         <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="drop-date" required>
       </div>
-      <div class="w3-col m2">
+      <div  class="w3-col m2">
         <label><i class="fa fa-car"></i> Select Car</label>
-        <select class="form-control form-control-lg w3-input w3-border " name="select-car">
-        <option value="0">all</option>
-          <option value="1">Ford</option>
-          <option value="2">KIA</option>
-          <option value="3">Honda</option>
+        <select id="brands" class="form-control form-control-lg w3-input w3-border " name="select-car">
+      
         </select>
       </div>
       <div class="w3-col m2">
@@ -153,8 +152,29 @@ if ($conn->query($sql) === TRUE) {
     $_SESSION["pickup-date"] = test_input($_POST["pickup-date"]);
     $_SESSION["drop-date"] = test_input($_POST["drop-date"]);
     $_SESSION["select-car"] = test_input($_POST["select-car"]);
-  echo "<script> window.location.href='cars.php'</script>";
+    $date=date('Y-m-d');
+    if($_POST["pickup-date"]>$date && $_POST["drop-date"]>$date && $_POST["drop-date"]>$_POST["pickup-date"]){
+      echo "<script> window.location.href='cars.php'</script>";
+    }else{
+      echo  "<script> alert('pick a valid dates');</script>";
+    }
+
   }
+  $carmodelsql="SELECT DISTINCT brandname FROM car  ";
+  $carresult1 = $conn->query($carmodelsql);
+  $selectcararr=[];
+  $brandhtml = "<option value=0>ALL</option>";
+  $selectcararr[] ="ALL";
+  $counter = 1;
+  while( $carrow1 = mysqli_fetch_assoc($carresult1)){
+      $selectcararr[] = $carrow1["brandname"];
+      $brandhtml = $brandhtml . "<option value=".$counter . ">" . $carrow1["brandname"] . "</option>";
+      $counter = $counter + 1;
+  }
+  $_SESSION["brands"] = $selectcararr;
+ echo "<script>
+ document.getElementById('brands').innerHTML ='" . $brandhtml . "';
+</script>";
 
   ?>
 
