@@ -16,7 +16,12 @@
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
-
+#dob {
+  display: block;
+  width: 100%;
+  height: 45px;
+  margin-bottom: 5px;
+}
 </style>
 </head>
 <body class="w3-light-grey">
@@ -53,7 +58,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <input type="text" placeholder="Enter Gender" name="gender" id="gender" required>
 
     <label for="dob"><b>DateofBirth</b></label>
-    <input type="text" placeholder="Enter Date of Birth" name="dob" id="dob" required>
+    <input type="date" placeholder="Enter Date of Birth" name="dob" id="dob" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" id="psw" required>
@@ -77,25 +82,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         <span onclick="document.getElementById('contact').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
         <h1>SIGN IN</h1>
       </div>
-      <div class="w3-container">
-        <p>Reserve a table, ask for today's special or just send us a message:</p>
-        <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="User Name" required name="UserName"></p>
-          <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="*******" required name="Password"></p>
-           <p><button class="w3-button w3-teal" type="submit">SIGN IN</button></p>
-            <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-  <div class="" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
 
-        </form>
+      <div class="w3-container">
+
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+          <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="email" required name="email"></p>
+          <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="*******" required name="password"></p>
+          <p><button name="login" class="w3-button w3-teal" type="submit">SIGN IN</button></p>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
       </div>
+      <div class="" style="background-color:#f1f1f1">
+        <button onclick="document.getElementById('contact').style.display='none'" type="button" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+
+      </form>
+
     </div>
- 
+  </div>
+  
     <?php
     // formdan alma
     require_once "connect.php";
@@ -163,12 +170,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $validation = false;
   } else {
     $dob = test_input($_POST["dob"]);
-
+    
+    
     // check if name only contains letters and whitespace
-    if (!preg_match("/^[0-9]*$/",$dob)) {
-      $dobErr = "Only numbers and white space allowed";
-      $validation = false;
-    }
   }
   
 
@@ -188,21 +192,21 @@ if ($validation) {
 
 
   $encPasswordd= md5($password);
-  $sql = "SELECT customerid, firstname, lastname,gender,dob,email,password FROM customer WHERE email='$email'";
+  $sql = "SELECT customerid, firstname, lastname,gender,dob,email,password,number FROM customer WHERE email='$email'";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
       echo "alredy registered";
   }else{
       $encPasswordd=md5($password);
-       
-      $sql = "INSERT INTO customer (firstname, lastname,gender,dob,email,password)
-VALUES ('$fname', '$lname', '$gender','$dob','$email','$encPasswordd')";
+      $sql = "INSERT INTO customer (firstname, lastname,gender,dob,email,password,number)
+VALUES ('$fname', '$lname', '$gender','$dob','$email','$encPasswordd','$number')";
 
       if ($conn->query($sql) === TRUE) {
-          echo "New record created successfully";
+          echo "<script>document.getElementById('contact').style.display='block'</script>";
           
       } else {
-          echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "<script>alert('Something went wrong!');</script>";
+
       }
   }
  
@@ -222,7 +226,47 @@ function test_input($data) {
 }
 
 ?>
+<?php
+  $email = $password = "";
+  if (isset($_POST["login"])) {
+    $validation = true;
+    if (empty($_POST["email"])) {
+      $emailErr = "Email is required";
+      $validation = false;
+    } else {
+      $email = test_input($_POST["email"]);
 
+      // check if e-mail address is well-formed
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email format";
+        $validation = false;
+      }
+    }
+
+    $password = $_POST["password"];
+      if ($validation) {
+      $encPasswordd = md5($password);
+      $sql = "SELECT customerid, firstname FROM customer WHERE email='$email' and password='$encPasswordd'";
+      $result = $conn->query($sql);
+      
+      if ($result->num_rows > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION["customerid"] = $row["customerid"];
+        echo "<script> window.location.href='index.php'</script>";
+      } else {
+        echo 'password or email incorrect';
+      }
+
+
+     // $conn->close();
+    } else {
+      echo "something wrong";
+    }
+  }
+
+
+
+  ?>
   <!-- Footer -->
 <footer class="w3-padding-32 w3-black w3-center w3-margin-top">
     <h5>Find Us On</h5>
