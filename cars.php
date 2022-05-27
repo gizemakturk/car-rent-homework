@@ -234,41 +234,7 @@ session_start();
       </div>
     </div>
     
-    <?php
-
-      $caridrent=$_POST["review"];
-
-    
-    $caridsql="SELECT * FROM car WHERE carid=".$caridrent;
-    $carrent1 = $conn->query($caridsql);
-    $caridrow1 = mysqli_fetch_assoc($carrent1);
-    $sqldetails = "SELECT dailyprice FROM cardetails WHERE detailsid=" . $caridrow1["detailsid"];
-          $detailresult = $conn->query($sqldetails);
-          $detailrow = mysqli_fetch_assoc($detailresult);
-        $diff = date_diff(date_create($pickupdate), date_create($dropdate));
-
-          $amount = $diff->format("%a") * $detailrow["dailyprice"];
-    if(isset($_SESSION["pickup-location"])){
-      $locations = ["Ankara", "Antalya", "Izmir", "Istanbul"];
-        $pickuplocation = $locations[$_SESSION["pickup-location"]];
-        $droplocation = $locations[$_SESSION["drop-location"]];
-      $pickupdate = $_SESSION["pickup-date"];
-      $dropdate = $_SESSION["drop-date"];
-    
-    $carrenthtml = "<div class=\'col-50\'><h1>Selected Car</h1><img src=\'". $caridrow1["image"]. "\' style=\'width:100%\'></div><div class=\'col-50\'><h1>". $caridrow1["brandname"]. " ". $caridrow1["modelname"]. "</h1>\
-    <h2> " . $pickuplocation . " & " .  $droplocation  .  "</h2>\
-    <h2> " . $pickupdate . " & " .  $dropdate  .  "</h2>\
-    <h2> " . $amount  .  "</h2>\
-    </div>";
-
    
-    echo "<script>
-    document.getElementById('carrent').innerHTML ='" . $carrenthtml ."';
-  </script>";
-    }
-  
-    ?>
-
     <!-- Modal -->
     <div id="contact" class="w3-modal">
       <div class="w3-modal-content w3-animate-zoom">
@@ -301,7 +267,6 @@ session_start();
     $pickuplocation = $droplocation = $pickupdate = $dropdate = $selectcar = "";
     $pickuplocationErr = $droplocationErr = $pickupdateErr = $dropdateErr = $selectcarErr = "";
     $selectcararr= $_SESSION["brands"];
-    $selectcar = $selectcararr[$_SESSION["select-car"]];
     $validation = true;
     $carstring = "<h2>CARS</h2>\
     <p>Choose a service that helps your needs.</p><br>";
@@ -310,6 +275,8 @@ session_start();
       $droplocation = $_SESSION["drop-location"];
       $pickupdate = $_SESSION["pickup-date"];
       $dropdate = $_SESSION["drop-date"];
+      $selectcar = $selectcararr[$_SESSION["select-car"]];
+
       if ($validation) {
         if($selectcar=="ALL"){
         $sql = "SELECT * from car where carid NOT IN (select r.carid from rent r where '$pickupdate' between r.startdate and r.enddate )";
@@ -342,7 +309,7 @@ session_start();
               <span class='w3-opacity'>per day</span>\
             </li>\
             <li class='w3-theme-l5 w3-padding-24'>\
-              <form method='post'><button id='" . $row["carid"] . "' value = '" . $row["carid"] . "' type='button' name='review' onclick='rent(this.id);' class='w3-button w3-teal w3-padding-large'><i class='fa fa-check'></i> Rent</button></form>\
+              <form method='post'><a id='" . $row["carid"] . "' value = '" . $row["carid"] . "' type='button' name='review' href='payment.php?carid=". $row["carid"] . "' class='w3-button w3-teal w3-padding-large'><i class='fa fa-check'></i> Rent</a></form>\
             </li>\
           </ul>\
         </div> ";
