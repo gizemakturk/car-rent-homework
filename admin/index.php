@@ -42,6 +42,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="index.php" class="w3-bar-item w3-button w3-padding w3-teal"><i class="fa fa-home fa-fw"></i>Home</a>
     <a href="vehicle.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-car fa-fw"></i> Vehicles</a>
     <a href="reservation.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Reservations</a>
+    <a href="message.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-envelope-open"></i>  Messages</a>
     <a href="adminlogin.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Log Out</a>
   </div>
 </nav>

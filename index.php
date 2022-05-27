@@ -341,28 +341,50 @@ if ($conn->query($sql) === TRUE) {
         <p><span class="glyphicon glyphicon-phone"></span>Phone:0555 555 55 55</p>
         <p><span class="glyphicon glyphicon-envelope"></span>Email: mail@mail.com</p>
       </div>
+      <form  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
       <div class="col-md-8">
         <div class="row">
           <div class="col-sm-6 form-group">
-            <input class="form-control" id="name" name="name" placeholder="İsim" type="text" required>
+            <input class="form-control" id="name" name="name" placeholder="name" type="text" required>
           </div>
           <div class="col-sm-6 form-group">
             <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
           </div>
           <div class="col-sm-12 form-group">
-            <input class="form-control" id="content" name="content" placeholder="Konu" type="text" required>
+            <input class="form-control" id="content" name="content" placeholder="content" type="text" required>
           </div>
         </div>
-        <textarea class="form-control" id="comments" name="comments" placeholder="Yorumunuz" rows="5"></textarea>
+        <textarea class="form-control" id="comments" name="comments" placeholder="comments" rows="5"></textarea>
         <br>
         <div class="row">
           <div class="col-md-12 form-group">
-            <button class="btn pull-right" type="submit">Send</button>
+            <button class="btn pull-right" name="message" type="submit">Send</button>
           </div>
         </div>
       </div>
+      </form>
     </div>
   </div>
+  <?php 
+   if (isset($_POST['message'])) {   
+    $customerid = $_SESSION["customerid"];
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $content = $_POST["content"];
+    $comments = $_POST["comments"];
+    if(isset($_SESSION["customerid"])){
+      $sqlmessage="INSERT INTO message (name,email,content,comments,customerid)
+      VALUES('$name','$email','$content','$comments',$customerid)";
+      if ($conn->query($sqlmessage) === TRUE) {
+        echo "<script>alert('Your message is taken from us!');</script>";
+        header("Location: index.php");
+        exit;
+      }
+    }else{
+     echo "<script>alert('you need to sign in to contact with us!');</script>";
+    }
+     }
+  ?>
   <!-- Modal -->
   <div id="contact" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
