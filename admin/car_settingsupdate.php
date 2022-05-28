@@ -241,13 +241,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     return $data;
   }
   ?>
-  <!-- Footer -->
-  <footer class="w3-padding-32 w3-gray w3-center w3-margin-top">
-    <h5>Find Us On</h5>
-    <div class="w3-xlarge w3-padding-16">
-    </div>
-   
-  </footer>
+  
   <!-- End page content -->
 </div>
 

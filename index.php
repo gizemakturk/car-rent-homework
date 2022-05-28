@@ -439,7 +439,6 @@ if ($conn->query($sql) === TRUE) {
         <label style='width: 100px;'><i class='fa fa-car'></i> ".$detailrow["numberofdoors"]."</label>\
         <label style='width: 100px;'><i class='fa fa-car'></i> ".$detailrow["geartype"]."</label>\
         <label><i class='fa fa-car'></i> ".$detailrow["numberofseat"]."</label>\
-        <button class='w3-button w3-block w3-black w3-margin-bottom'>Rent Car</button>\
       </div>\
     </div>";
     $counter = $counter + 1;

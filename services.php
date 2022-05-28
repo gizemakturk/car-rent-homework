@@ -70,9 +70,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <h2 class="w3-wide"><i class="fa fa-usd"></i> 10</h2>
             <span class="w3-opacity">per month</span>
           </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
-          </li>
+        
         </ul>
       </div>
   
@@ -89,9 +87,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <h2 class="w3-wide"><i class="fa fa-usd"></i> 25</h2>
             <span class="w3-opacity">per month</span>
           </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
-          </li>
+          
         </ul>
       </div>
   
@@ -108,9 +104,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
             <span class="w3-opacity">per month</span>
           </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
-          </li>
+          
         </ul>
       </div>
       <div class="w3-third w3-margin-bottom">
@@ -126,9 +120,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
             <span class="w3-opacity">per month</span>
           </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
-          </li>
+          
         </ul>
       </div>
       <div class="w3-third w3-margin-bottom">
@@ -144,9 +136,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
             <span class="w3-opacity">per month</span>
           </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
-          </li>
+          
         </ul>
       </div>
       <div class="w3-third w3-margin-bottom">
@@ -162,9 +152,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <h2 class="w3-wide"><i class="fa fa-usd"></i> 50</h2>
             <span class="w3-opacity">per month</span>
           </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Sign Up</button>
-          </li>
+         
         </ul>
       </div>
   </div>
