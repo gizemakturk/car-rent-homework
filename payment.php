@@ -242,7 +242,7 @@ session_start();
         $detailresult = $conn->query($sqldetails);
         $detailrow = mysqli_fetch_assoc($detailresult);
 
-        
+        var_dump($_SESSION["pickup-location"]);
             $locations = ["Ankara", "Antalya", "Izmir", "Istanbul"];
             $pickuplocation = $locations[$_SESSION["pickup-location"]];
             $droplocation = $locations[$_SESSION["drop-location"]];

@@ -31,6 +31,8 @@ if ($conn->query($sql) === TRUE) {
     h6 {
       font-family: "Raleway", Arial, Helvetica, sans-serif
     }
+
+ 
   </style>
 </head>
 
@@ -125,12 +127,12 @@ if ($conn->query($sql) === TRUE) {
       </div>
       <div class="w3-col m2">
         <label><i class="fa fa-calendar-o"></i> Pick Up Date</label>
-        <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="pickup-date" required>
+        <input id="pickup-date" class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="pickup-date" required>
       </div>
 
       <div class="w3-col m2">
         <label><i class="fa fa-calendar-o"></i> Drop Date </label>
-        <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="drop-date" required>
+        <input id="drop-date" class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="drop-date" required>
       </div>
       <div  class="w3-col m2">
         <label><i class="fa fa-car"></i> Select Car</label>
@@ -146,7 +148,7 @@ if ($conn->query($sql) === TRUE) {
   </form>
   <?php
 
-  if (isset($_POST['form1'])) {    
+  if (isset($_POST['form1'])) {   
     $_SESSION["pickup-location"] = test_input($_POST["pickup-location"]);
     $_SESSION["drop-location"] = test_input($_POST["drop-location"]);
     $_SESSION["pickup-date"] = test_input($_POST["pickup-date"]);
@@ -154,7 +156,7 @@ if ($conn->query($sql) === TRUE) {
     $_SESSION["select-car"] = test_input($_POST["select-car"]);
     $date=date('Y-m-d');
     if($_POST["pickup-date"]>$date && $_POST["drop-date"]>$date && $_POST["drop-date"]>$_POST["pickup-date"]){
-      echo "<script> window.location.href='cars.php'</script>";
+     echo "<script> window.location.href='cars.php'</script>";
     }else{
       echo  "<script> alert('pick a valid dates');</script>";
     }

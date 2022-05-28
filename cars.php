@@ -197,7 +197,8 @@ session_start();
     $validation = true;
     $carstring = "<h2>CARS</h2>\
     <p>Choose a service that helps your needs.</p><br>";
-    if(isset($_SESSION["pickup-location"])){
+    if(isset($_SESSION["select-car"])){
+
       $pickuplocation = $_SESSION["pickup-location"];
       $droplocation = $_SESSION["drop-location"];
       $pickupdate = $_SESSION["pickup-date"];
@@ -242,7 +243,7 @@ session_start();
         </div> ";
           
           }
-          unset($_SESSION["pickup-location"]);
+          unset($_SESSION["select-car"]);
         } else {
           echo 'araba yok';
         }
