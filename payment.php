@@ -252,9 +252,9 @@ session_start();
 
             $amount = $diff->format("%a") * $detailrow["dailyprice"];
             $carrenthtml = "<div class=\'col-50\'><h1>Selected Car</h1><img src=\'" . $caridrow1["image"] . "\' style=\'width:100%\'></div><div class=\'col-50\'><h1>" . $caridrow1["brandname"] . " " . $caridrow1["modelname"] . "</h1>\
-<h2> " . $pickuplocation . " & " .  $droplocation  .  "</h2>\
-<h2> " . $pickupdate . " & " .  $dropdate  .  "</h2>\
-<h2> " . $amount  .  "</h2>\
+<h2> Locations: " . $pickuplocation . " & " .  $droplocation  .  "</h2>\
+<h2> Dates:" . $pickupdate . " & " .  $dropdate  .  "</h2>\
+<h2> Total Price" . $amount  .  "</h2>\
 </div>";
 
 

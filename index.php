@@ -148,7 +148,8 @@ if ($conn->query($sql) === TRUE) {
   </form>
   <?php
 
-  if (isset($_POST['form1'])) {   
+  if (isset($_POST['form1'])) {  
+ 
     $_SESSION["pickup-location"] = test_input($_POST["pickup-location"]);
     $_SESSION["drop-location"] = test_input($_POST["drop-location"]);
     $_SESSION["pickup-date"] = test_input($_POST["pickup-date"]);
